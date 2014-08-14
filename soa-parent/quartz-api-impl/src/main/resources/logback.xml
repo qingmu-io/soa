@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<jmxConfigurator />
+	<!-- 控制台输出 -->
+	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %msg%n</pattern>
+		</encoder>
+	</appender>
+	<root level="DEBUG">
+		<appender-ref ref="stdout" />
+		<!-- <appender-ref ref="file—debug" /> <appender-ref ref="file—error" /> 
+			<appender-ref ref="file-str" /> <appender-ref ref="db" /> -->
+	</root>
+
+</configuration>

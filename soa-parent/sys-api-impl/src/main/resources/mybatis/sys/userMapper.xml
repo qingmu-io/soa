@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="USER">
+
+	<sql id="select_sql">
+		SELECT
+		id AS id <!-- id -->
+		,username AS username <!-- 用户名 -->
+		,email AS email <!-- 邮箱 -->
+		,mobile_phone_number AS mobilePhoneNumber <!-- 手机号 -->
+		,password AS password <!-- 密码 -->
+		,salt AS salt   <!-- 盐值 -->
+		,create_date AS createDate <!-- 创建日期 -->
+		,status AS status   <!-- 'normal' 状态 -->
+		,deleted AS deleted   <!-- 是否被删除 bool类型 -->
+		,admin AS admin    		<!-- 是否是管理员 bool类型 -->
+		FROM sys_user
+	</sql>
+
+	<select id="login" parameterType="map" resultType="map">
+		<include refid="select_sql" />
+		where username=#{username}
+	</select>
+
+	<select id="query" parameterType="map" resultType="map">
+		<include refid="select_sql" />
+		<where>
+			<if test="id!=null and id!='' ">
+				and id = #{id}
+			</if>
+			<if test="username!=null and username!='' ">
+				and username = #{username}
+			</if>
+			<if test="email!=null and email!='' ">
+				and email = #{email}
+			</if>
+			<if test="mobilePhoneNumber!=null and mobilePhoneNumber!='' ">
+				and mobile_phone_number = #{mobilePhoneNumber}
+			</if>
+			<if test="password!=null and password!='' ">
+				and password = #{password}
+			</if>
+			<if test="salt!=null and salt!='' ">
+				and salt = #{salt}
+			</if>
+			<if test="createDate!=null and createDate!='' ">
+				and create_date = #{createDate}
+			</if>
+			<if test="status!=null and status!='' ">
+				and status = #{status}
+			</if>
+			<if test="deleted!=null and deleted!='' ">
+				and deleted = #{deleted}
+			</if>
+			<if test="admin!=null and admin!='' ">
+				and admin = #{admin}
+			</if>
+		</where>
+	</select>
+
+	<select id="count" parameterType="map" resultType="int">
+		<include refid="select_sql" />
+		<where>
+			<if test="id!=null and id!='' ">
+				and id = #{id}
+			</if>
+			<if test="username!=null and username!='' ">
+				and username = #{username}
+			</if>
+			<if test="email!=null and email!='' ">
+				and email = #{email}
+			</if>
+			<if test="mobilePhoneNumber!=null and mobilePhoneNumber!='' ">
+				and mobile_phone_number = #{mobilePhoneNumber}
+			</if>
+			<if test="password!=null and password!='' ">
+				and password = #{password}
+			</if>
+			<if test="salt!=null and salt!='' ">
+				and salt = #{salt}
+			</if>
+			<if test="createDate!=null and createDate!='' ">
+				and create_date = #{createDate}
+			</if>
+			<if test="status!=null and status!='' ">
+				and status = #{status}
+			</if>
+			<if test="deleted!=null and deleted!='' ">
+				and deleted = #{deleted}
+			</if>
+			<if test="admin!=null and admin!='' ">
+				and admin = #{admin}
+			</if>
+		</where>
+	</select>
+
+	<insert id="insert" parameterType="map">
+		INSERT INTO sys_user(
+		id
+		,username
+		,email
+		,mobile_phone_number
+		,password
+		,salt
+		,create_date
+		,status
+		,deleted
+		,admin
+		) VALUES (
+		#{id}
+		,#{username}
+		,#{email}
+		,#{mobilePhoneNumber}
+		,#{password}
+		,#{salt}
+		,#{createDate}
+		,#{status}
+		,#{deleted}
+		,#{admin}
+		)
+	</insert>
+	<delete id="delete" parameterType="map">
+		DELETE sys_user where id=#{id}
+	</delete>
+	<update id="update" parameterType="map">
+		UPDATE sys_user
+		<set>
+			<if test="id!=null and id!='' ">
+				and id = #{id}
+			</if>
+			<if test="username!=null and username!='' ">
+				and username = #{username}
+			</if>
+			<if test="email!=null and email!='' ">
+				and email = #{email}
+			</if>
+			<if test="mobilePhoneNumber!=null and mobilePhoneNumber!='' ">
+				and mobile_phone_number = #{mobilePhoneNumber}
+			</if>
+			<if test="password!=null and password!='' ">
+				and password = #{password}
+			</if>
+			<if test="salt!=null and salt!='' ">
+				and salt = #{salt}
+			</if>
+			<if test="createDate!=null and createDate!='' ">
+				and create_date = #{createDate}
+			</if>
+			<if test="status!=null and status!='' ">
+				and status = #{status}
+			</if>
+			<if test="deleted!=null and deleted!='' ">
+				and deleted = #{deleted}
+			</if>
+			<if test="admin!=null and admin!='' ">
+				and admin = #{admin}
+			</if>
+		</set>
+	</update>
+</mapper>

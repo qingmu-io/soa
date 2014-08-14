@@ -1,0 +1,44 @@
+#============================================================================
+# Configure Main Scheduler Properties  
+#============================================================================
+#唯一标识，同一个集群的名称必须一致
+org.quartz.scheduler.instanceName = MyClusteredScheduler
+#auto，则quartz会根据时间和主机名生成，确保唯一
+org.quartz.scheduler.instanceId = AUTO
+
+
+#============================================================================
+# Configure ThreadPool  
+#============================================================================
+
+org.quartz.threadPool.class = org.quartz.simpl.SimpleThreadPool
+org.quartz.threadPool.threadCount = 25
+org.quartz.threadPool.threadPriority = 5
+
+#============================================================================
+# Configure JobStore  
+#============================================================================
+
+org.quartz.jobStore.misfireThreshold = 60000
+
+#jobstoretx则任务会被持久化到数据中，默认为RAMJobStore，默认会被维护到内存中，集群的时候必须修改
+org.quartz.jobStore.class = org.quartz.impl.jdbcjobstore.JobStoreTX
+org.quartz.jobStore.driverDelegateClass = org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+org.quartz.jobStore.useProperties = false
+#org.quartz.jobStore.dataSource = myDS
+org.quartz.jobStore.tablePrefix = QRTZ_
+
+#ture则此实例需要参加到集群中
+org.quartz.jobStore.isClustered = true
+org.quartz.jobStore.clusterCheckinInterval = 20000
+
+#============================================================================
+# Configure Datasources  
+#============================================================================
+
+#org.quartz.dataSource.myDS.driver = com.mysql.jdbc.Driver
+#org.quartz.dataSource.myDS.URL = jdbc:mysql://localhost:3306/quartz?useUnicode=true&characterEncoding=utf-8
+#org.quartz.dataSource.myDS.user = root
+#org.quartz.dataSource.myDS.password = 
+#org.quartz.dataSource.myDS.maxConnections = 10
+#org.quartz.dataSource.myDS.validationQuery=select 1 

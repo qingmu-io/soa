@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="QUARTZ">
+	<sql id="sql">
+		SELECT
+		GUID as guid			<!-- guid -->
+		,JOB_NAME as jobName			<!-- 作业名 -->
+		,JOB_GROUP as jobGroup		<!-- 作业分组 -->
+		,CLAZZ as clazz          	<!-- 作业类 -->
+		,CRON_EXPRESSION as cronExpression	<!-- 作业执行表达式 -->
+		,TRIGGER_NAME as triggerName	<!-- 触发器名称 -->
+		,TRIGGER_GROUP as triggerGroup	<!-- 触发器分组 -->
+		,STATUS as status	<!-- 作业状态 1运行 -1 暂停 -->
+		,create_time as createTime<!-- 创建时间 -->
+		,create_author as createAuthor	<!-- 创建人 -->
+		FROM t_sys_job
+	</sql>
+	<select id="load" parameterType="map" resultType="map">
+		<include refid="sql" />
+		<where>
+			guid=#{guid}
+		</where>
+	</select>
+	<select id="query" parameterType="map" resultType="map">
+		<include refid="sql" />
+		<where>
+			<if test="jobName !=null and jobName != '' ">
+				and job_name = '%${jobName}%'
+			</if>
+			<if test="jobGroup != null and jobGroup!='' ">
+				and job_group = #{jobGroup}
+			</if>
+			<if test="cronExpression != null and cronExpression != '' ">
+				and cron_expression = #{cronExpression}
+			</if>
+			<if test="triggerName != null and triggerName != '' ">
+				and trigger_name = #{triggerName}
+			</if>
+			<if test="triggerGroup != null and triggerGroup != '' ">
+				and trigger_group = #{triggerGroup}
+			</if>
+			<if test="status != null and status != '' ">
+				and status = #{status}
+			</if>
+		</where>
+	</select>
+	
+	<select id="countQrtzJobDetails" parameterType="map" resultType="int">
+		SELECT count(*) FROM qrtz_job_details WHERE Job_name =#{jobName};
+	</select>
+	<select id="countQrtzCronTriggers" parameterType="map" resultType="int">
+		SELECT count(*) FROM qrtz_cron_triggers WHERE Job_name =#{trigger_name};
+	</select>
+	<select id="countJobClass" parameterType="map" resultType="int">
+		SELECT count(*) FROM qrtz_job_details WHERE Job_class_name =#{clazz};
+	</select>
+	
+	<insert id="insert" parameterType="map">
+		INSERT INTO t_sys_job(
+		GUID 				<!-- guid -->
+		,JOB_NAME 			<!-- 作业名 -->
+		,JOB_GROUP 			<!-- 作业分组 -->
+		,CLAZZ             	<!-- 作业类 -->
+		,CRON_EXPRESSION 	<!-- 作业执行表达式 -->
+		,TRIGGER_NAME 		<!-- 触发器名称 -->
+		,TRIGGER_GROUP 		<!-- 触发器分组 -->
+		,STATUS  			<!-- 作业状态 1运行 -1 暂停 -->
+		,create_time datatime<!-- 创建时间 -->
+		,create_author		<!-- 创建人 -->
+		)values(
+		#{guid}
+		,#{jobName}
+		,#{jobGroup}
+		,#{clazz}
+		,#{cronExpression}
+		,#{triggerName}
+		,#{triggerGroup}
+		,#{status}
+		,#{createTime}
+		,#{createAuthor}
+		)
+	</insert>
+
+	<delete id="delete" parameterType="map">
+		DELETE FROM t_sys_job
+		<where>
+			guid = #{guid}
+		</where>
+	</delete>
+
+	<update id="update" parameterType="map">
+		UPDATE t_sys_job
+		<set>
+			<if test="jobName !=null and jobName != '' ">
+				job_name = #{jobName}
+			</if>
+			<if test="jobGroup != null and jobGroup!='' ">
+				job_group = #{jobGroup}
+			</if>
+			<if test="cronExpression != null and cronExpression != '' ">
+				cron_expression = #{cronExpression}
+			</if>
+			<if test="triggerName != null and triggerName != '' ">
+				trigger_name = #{triggerName}
+			</if>
+			<if test="triggerGroup != null and triggerGroup != '' ">
+				trigger_group = #{triggerGroup}
+			</if>
+			<if test="status != null and status != '' ">
+				status = #{status}
+			</if>
+		</set>
+		<where>
+			guid=#{guid}
+		</where>
+	</update>
+</mapper>
