@@ -1,4 +1,4 @@
-package org.soa.common.util;
+package org.soa.util;
 
 import java.sql.DriverManager;
 import java.sql.ResultSet;

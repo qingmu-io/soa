@@ -1,4 +1,4 @@
-package org.soa.common.util;
+package org.soa.core.holder;
 
 import java.io.IOException;
 

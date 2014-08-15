@@ -62,7 +62,7 @@ public abstract class BaseService {
 	}
 
 	public SoaContext queryByPage(SoaContext context) {
-		return query(context, getNameSpace());
+		return queryByPage(context, getNameSpace());
 	}
 
 	public SoaContext query(SoaContext context, String namespace,

@@ -1,0 +1,47 @@
+<div ng-controller="userList">
+<div class="form-inline">
+	<fieldset >
+		<legend>用户列表</legend>
+			<label >姓名 <input type="text" ng-model="user.username" class="input-small" /></label>
+			<label >time<input type="time" ng-model="user.phone" class="input-small" /></label>
+			<button class="btn" ng-click="page">提交</button>
+	</fieldset>
+</div>
+<div></div>
+<div>
+	<label><button class="btn btn-success">新增</button></label>
+</div>
+<table class="table table-hover table-bordered table-condensed">
+	<thead>
+		<tr >
+			<th ng-repeat="meta in metas">{{meta}}</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="data in datas">
+			<td>{{data.name}}</td>
+			<td>TB - Monthly</td>
+			<td>01/04/2012</td>
+			<td>{{data.phoneNumber}}</td>
+		</tr>
+<!-- 		<tr class="success">
+			<td>1</td>
+			<td>TB - Monthly</td>
+			<td>01/04/2012</td>
+			<td>Approved</td>
+		</tr> -->
+		
+	</tbody>
+</table>
+<div class="pagination pagination-centered pagination-small">
+	<ul>
+		<li><a href="#">上一页</a></li>
+		<li><a href="#">1</a></li>
+		<li><a href="#">2</a></li>
+		<li><a href="#">3</a></li>
+		<li><a href="#">4</a></li>
+		<li><a href="#">5</a></li>
+		<li><a href="#">下一页</a></li>
+	</ul>
+</div>
+</div>

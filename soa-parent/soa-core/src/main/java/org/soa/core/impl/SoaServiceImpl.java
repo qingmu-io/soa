@@ -3,9 +3,9 @@ package org.soa.core.impl;
 import java.lang.reflect.Method;
 
 import org.soa.common.context.SoaContext;
-import org.soa.common.util.SpringContextHolder;
 import org.soa.core.SoaService;
 import org.soa.core.Status;
+import org.soa.core.holder.SpringContextHolder;
 import org.soa.logger.SoaLogger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
