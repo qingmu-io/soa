@@ -29,9 +29,9 @@
 					<div class="span12">
 						<div class="row-fluid">
 							<div class="span4"></div>
-							<div class="span4" ng-app="sys" >
+							<div class="span4" ng-app="userController" >
 							
-								<form class="form-inline form-horizontal" ng-controller="loginCtrl">
+								<form class="form-inline form-horizontal" ng-controller="login">
 									<fieldset>
 										<legend>用户登录</legend>
 										
@@ -68,39 +68,24 @@
 			</div>
 		</div>
 	</div>
-	<script  src="/soa-rest/static/angular-1.2.2/angular.js"></script>
-	<script  src="/soa-rest/static/commons/jquery.js"></script>
-	<script  src="/soa-rest/static/commons/js/Request.js"></script>
-	<script  src="/soa-rest/static/commons/js/Util.js"></script>
-	<script  src="/soa-rest/static/commons/js/StringUtil.js"></script>
-	<script  src="/soa-rest/static/commons/js/StringBuffer.js"></script>
-	<script  src="/soa-rest/static/commons/js/Validata.js"></script>
-	<script  src="/soa-rest/static/commons/js/Constants.js"></script>
-	<script  src="/soa-rest/static/bootstrap/js/bootstrap.min.js"></script>
-	<script  src="/soa-rest/static/commons/js/validata/login_validata.js"></script>
-	<script  src="/soa-rest/static/app-js/sys/user/login.js"></script>
-	<script >
-/* 	$("#table").html(new Table({
-		columns:[
-		    {
-		    	title : '编号',
-		    	column : 'id',
-		    },{
-		    	title : '姓名',
-		    	column : 'name',
-		    }
-		   ],
-		 data:[{
-			 			id:'123',
-			 			name:'张三'
-		 				},{
-		 					id:'456',
-				 			name:'李四'
-		 				}]
-	}  
-			
-	).toString()); */
-	//new Table();
+	
+	<script src="/soa-rest/static/app-js/jquery.js"></script>
+	<script src="/soa-rest/static/app-js/commons/stringBuffer.js"></script>
+	<script src="/soa-rest/static/app-js/angular.min.js"></script>
+	<script src="/soa-rest/static/app-js/angular-route.js"></script>
+	<script src="/soa-rest/static/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/soa-rest/static/app-js/commons/util.js"></script>
+	<script src="/soa-rest/static/app-js/commons/stringUtil.js"></script>
+	<script src="/soa-rest/static/app-js/commons/validata.js"></script>
+	<script src="/soa-rest/static/app-js/commons/constants.js"></script>
+	<script src="/soa-rest/static/app-js/commons/accordion.js"></script>
+	<script src="/soa-rest/static/app-js/app.js"></script>
+	<script src="/soa-rest/static/app-js/commons/Request.js"></script>
+	<script  src="/soa-rest/static/app-js/modules/sys/service/sysService.js"></script>
+	<script  src="/soa-rest/static/app-js/modules/sys/controller/userController.js"></script>
+	<script src="/soa-rest/static/app-js/commons/validata/login_validata.js"></script>
+	<script type="text/javascript">
+		Validata.bind(document.forms[0]);
 	</script>
 </body>
 </html>

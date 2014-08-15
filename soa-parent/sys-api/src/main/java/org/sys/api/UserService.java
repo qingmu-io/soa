@@ -6,6 +6,6 @@ public interface UserService {
 	
 	public abstract SoaContext login(SoaContext context);
 	public abstract SoaContext insert(SoaContext context);
-	
+	public abstract SoaContext page(SoaContext context);
 
 }

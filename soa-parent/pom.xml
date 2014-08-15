@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>mt.soa</groupId>
 	<artifactId>soa-parent</artifactId>
@@ -411,7 +410,7 @@
 				<version>${quartz.version}</version>
 			</dependency>
 
-			<!-- google guava 集合 IO Strings 。。 -->
+			<!-- google guava 集合 IO Strings 。�? -->
 			<dependency>
 				<groupId>com.google.guava</groupId>
 				<artifactId>guava</artifactId>
@@ -433,5 +432,6 @@
 		<module>soa-quartz-core</module>
 		<module>quartz-api</module>
 		<module>quartz-api-impl</module>
-	</modules>
+    <module>soa-util</module>
+  </modules>
 </project>

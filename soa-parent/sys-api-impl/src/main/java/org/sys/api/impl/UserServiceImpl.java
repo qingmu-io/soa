@@ -3,8 +3,8 @@ package org.sys.api.impl;
 import java.sql.Timestamp;
 
 import org.soa.common.context.SoaContext;
-import org.soa.common.util.IdUtil;
 import org.soa.core.service.BaseService;
+import org.soa.util.IdUtil;
 import org.sys.api.UserService;
 
 @org.springframework.stereotype.Service("userService")
@@ -16,6 +16,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 	public SoaContext login(SoaContext context) {
 		return super.queryStatement(context, LOGIN);
 	}
+	
 	public  SoaContext insert(SoaContext context){
 		context.addAttr("salt",IdUtil.salt());
 		context.addAttr("createDate", new Timestamp(System.currentTimeMillis()));
@@ -26,6 +27,12 @@ public class UserServiceImpl extends BaseService implements UserService {
 	@Override
 	public String getNameSpace() {
 		return NAMESPACE;
+	}
+	
+	@Override
+	public SoaContext page(SoaContext context) {
+		super.queryByPage(context);
+		return context;
 	}
 
 }

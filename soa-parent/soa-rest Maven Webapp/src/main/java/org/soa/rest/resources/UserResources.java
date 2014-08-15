@@ -19,17 +19,17 @@ import com.alibaba.dubbo.config.annotation.Reference;
 @RequestMapping
 public class UserResources {
 	
-	@Reference(version = "1.0.0",interfaceClass=SysSoaManger.class,timeout=2000)
+	@Reference(version = "1.0.0",interfaceClass=SysSoaManger.class,timeout=2000,check=true)
 	private SysSoaManger soaManger;
 
 	@ResponseBody
-	@RequestMapping(value="/sys/service",method={RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value="/sys/invoker"
+					,method={RequestMethod.GET,RequestMethod.POST})
 	public SoaContext login(@ModelAttribute SoaContext context,HttpServletRequest request) {
 		final Enumeration<String> names = request.getParameterNames();
 		while (names.hasMoreElements()) {
 			String key = names.nextElement();
 			System.out.println("key:"+key+" -------------  value:"+request.getParameter(key));
-			
 			if(key.intern() == "method".intern() ||key.intern() == "service".intern()) continue;
 			context.addAttr(key, request.getParameter(key));
 		}
@@ -43,6 +43,8 @@ public class UserResources {
 	public String loginView(@PathVariable("url") String url){
 		return url;
 	}
+	
+	
 	
 
 }

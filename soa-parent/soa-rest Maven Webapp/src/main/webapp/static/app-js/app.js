@@ -1,27 +1,24 @@
-angular.module('appRoute',['ngRoute','controllers'])
+var tempRoot = new StringBuffer().append('/soa-rest/template/');
+var sysTempRoot = new StringBuffer().append('/soa-rest/template/sys/');
+var sysUserTempRoot = new StringBuffer().append('/soa-rest/template/sys/user/');
+
+angular.module('appRoute',['ngRoute','userController'])
 .config(function($routeProvider){
 	$routeProvider
 	//首页
 	.when('/index',{
-		controller:'index',
-		templateUrl : '/soa-rest/template/table.html'
+		controller:'userList',
+		templateUrl : tempRoot.append('table.html').toString()
 	})
-	//通过ID获取用户信息
-	.when('/user/:id',{
-		controller:'user.id',
-		templateUrl : '/soa-rest/template/user_list.html'
+	/*begin 用户管理*/
+	.when('/userList',{
+		controller:'userList',
+		templateUrl : sysUserTempRoot.append('user_list.html').toString()
 	})
-	
-	.when('/form',{
-		controller:'form',
-		templateUrl : '/soa-rest/template/form.html'
-	})
-	.when('/table',{
-		controller:'table'
-		,templateUrl : '/soa-rest/template/table.html'	
-	})
+	/*end 用户管理*/
+
 	.otherwise({
-//        redirectTo: '/index'
+        redirectTo: '/userList'
     })
     ;
 });

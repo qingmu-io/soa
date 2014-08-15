@@ -56,38 +56,38 @@
 							<div class="accordion-group" ng-repeat="module in modules">
 								<div class="accordion-heading">
 									<a class="accordion-toggle" data-toggle="collapse"
-										data-parent="#soa-acc" >{{module.name}}</a>
+										data-parent="#soa-acc" ng-bind="module.name"><span ></span></a>
 								</div>
 
 								<div id="{{module.id}}" class="accordion-body in collapse"
 									ng-if="$index == 0">
 									<ul class="nav nav-list">
 										<li ng-repeat="menu in module.menus" ng-if="$index == 0&& module.name==indexName" class="active">
-											<a href="#{{menu.url}}">{{menu.name}}</a>
+											<a href="#{{menu.url}}" ng-bind="menu.name"></a>
 										</li>
 										<li ng-repeat="menu in module.menus" ng-if="$index != 0 && module.name!=indexName"><a
-											href="#{{menu.url}}">{{menu.name}}</a></li>
+											href="#{{menu.url}}" ng-bind="menu.name"></a></li>
 									</ul>
 								</div>
 
-								<div id="{{module.id}}" class="accordion-body  collapse"
+								<div id="{{module.id}}" class="accordion-body collapse"
 									ng-if="$index != 0">
 									<ul class="nav nav-list ">
 
 										<li ng-repeat="menu in module.menus"
 											ng-if="$index == 0&& module.name==indexName" class="active">
-											<a href="#{{menu.url}}">{{menu.name}}</a>
+											<a href="#{{menu.url}}" ng-bind="menu.name" ></a>
 										</li>
 										<li ng-repeat="menu in module.menus"
 											ng-if="$index != 0 && module.name!=indexName"><a
-											href="#{{menu.url}}">{{menu.name}}</a></li>
+											href="#{{menu.url}}" ng-bind="menu.name"></a></li>
 									</ul>
 								</div>
 
 							</div>
 						</div>
 					</div>
-					<div class="span10" ng-app="appRoute" ng-view></div>
+					<div class="span10"  ng-view></div>
 
 				</div>
 
@@ -95,19 +95,24 @@
 		</div>
 	</div>
 	<script src="/soa-rest/static/app-js/jquery.js"></script>
+	<script src="/soa-rest/static/app-js/commons/stringBuffer.js"></script>
 	<script src="/soa-rest/static/bootstrap/js/bootstrap.min.js"></script>
 	<script src="/soa-rest/static/app-js/angular.js"></script>
 	<script src="/soa-rest/static/app-js/angular-route.js"></script>
+	<script src="/soa-rest/static/app-js/commons/Request.js"></script>
+	<script src="/soa-rest/static/app-js/commons/util.js"></script>
+	<script src="/soa-rest/static/app-js/commons/stringUtil.js"></script>
+	<script src="/soa-rest/static/app-js/commons/validata.js"></script>
+	<script src="/soa-rest/static/app-js/commons/constants.js"></script>
+	<script src="/soa-rest/static/app-js/commons/accordion.js"></script>
+	<script src="/soa-rest/static/app-js/commons/validata/login_validata.js"></script>
+	
 	<script src="/soa-rest/static/app-js/app.js"></script>
-	<script src="/soa-rest/static/app-js/controllers.js"></script>
-	<script src="/soa-rest/static/commons/js/Request.js"></script>
-	<script src="/soa-rest/static/commons/js/Util.js"></script>
-	<script src="/soa-rest/static/commons/js/StringUtil.js"></script>
-	<script src="/soa-rest/static/commons/js/StringBuffer.js"></script>
-	<script src="/soa-rest/static/commons/js/Validata.js"></script>
-	<script src="/soa-rest/static/commons/js/Constants.js"></script>
-	<script src="/soa-rest/static/commons/js/accordion.js"></script>
-	<script src="/soa-rest/static/commons/js/validata/login_validata.js"></script>
+	<script  src="/soa-rest/static/app-js/modules/sys/service/sysService.js"></script>
+	<script  src="/soa-rest/static/app-js/modules/sys/controller/userController.js"></script> 
+	
+	<!-- <script src="/soa-rest/static/require.js" data-main="/soa-rest/static/main"></script> -->
+	<!--  <script  src="/soa-rest/static/app-js/modules/sys/sys_service.js"></script>  -->
 
 </body>
 </html>

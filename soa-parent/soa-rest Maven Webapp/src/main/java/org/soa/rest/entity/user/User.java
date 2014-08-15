@@ -42,7 +42,7 @@ public class User extends BaseEntity{
 	/**
 	 * 加密密码时使用的种子
 	 */
-	private String salt;
+	private String salt ;
 
 	/**
 	 * 创建时间
