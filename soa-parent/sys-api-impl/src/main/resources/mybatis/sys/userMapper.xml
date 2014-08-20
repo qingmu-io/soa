@@ -59,7 +59,7 @@
 	</select>
 
 	<select id="count" parameterType="map" resultType="int">
-		<include refid="select_sql" />
+		SELECT count(*) FROM sys_user 
 		<where>
 			<if test="id!=null and id!='' ">
 				and id = #{id}

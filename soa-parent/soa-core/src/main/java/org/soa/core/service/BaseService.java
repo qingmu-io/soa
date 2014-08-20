@@ -44,8 +44,7 @@ public abstract class BaseService {
 	public SoaContext queryByPage(SoaContext context, String namespace) {
 		try {
 			if (context.getAttr().size() == 0) {
-				context.setRows(dao.query(namespace, QUERY, context.getLimit(),
-						context.getPage()));
+				context.setRows(dao.query(namespace, QUERY, context.getLimit(),context.getPage()));
 				context.setTotal(dao.count(namespace, COUNT));
 			} else {
 				context.setRows(dao.query(namespace, QUERY, context.getAttr(),

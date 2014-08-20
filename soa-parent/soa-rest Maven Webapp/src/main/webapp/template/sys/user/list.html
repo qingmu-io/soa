@@ -1,4 +1,4 @@
-<div ng-controller="userList">
+<div>
 <div class="form-inline">
 	<fieldset >
 		<legend>用户列表</legend>
@@ -18,11 +18,13 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr ng-repeat="data in datas">
-			<td>{{data.name}}</td>
-			<td>TB - Monthly</td>
-			<td>01/04/2012</td>
-			<td>{{data.phoneNumber}}</td>
+		<tr ng-repeat="user in users">
+			<td>{{user.username}}</td>
+			<td>{{user.email}}</td>
+			<td>{{user.mobilePhoneNumber}}</td>
+			<td>{{user.status}}</td>
+			<td>{{user.admin}}</td>
+			<td>{{user.createDate}}</td>
 		</tr>
 <!-- 		<tr class="success">
 			<td>1</td>
@@ -33,15 +35,17 @@
 		
 	</tbody>
 </table>
-<div class="pagination pagination-centered pagination-small">
+<page></page>
+<!-- <div class="pagination pagination-centered pagination-small">
 	<ul>
 		<li><a href="#">上一页</a></li>
-		<li><a href="#">1</a></li>
+		<li><a href="">1</a></li>
 		<li><a href="#">2</a></li>
 		<li><a href="#">3</a></li>
 		<li><a href="#">4</a></li>
 		<li><a href="#">5</a></li>
 		<li><a href="#">下一页</a></li>
 	</ul>
-</div>
+</div> -->
+
 </div>

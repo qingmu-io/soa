@@ -1,10 +1,23 @@
 var tempRoot = new StringBuffer().append('/soa-rest/template/');
 var sysTempRoot = new StringBuffer().append('/soa-rest/template/sys/');
 var sysUserTempRoot = new StringBuffer().append('/soa-rest/template/sys/user/');
+var directiveTempRoot = new StringBuffer().append("/soa-rest/template/directive/");
 
-angular.module('appRoute',['ngRoute','userController'])
+!function(window){
+	window.import = function(jsUrl){
+		document.write("<script language='javascript' src='/soa-rest/static/app-js/"+jsUrl+".js'></script>");
+	};
+}(window);
+
+
+window.import("modules/sys/service/sysService");
+window.import("modules/directive");
+window.import("modules/sys/controller/userController");
+
+angular.module('appRoute',['ngRoute','userController','soaDirective'])
 .config(function($routeProvider){
 	$routeProvider
+	
 	//首页
 	.when('/index',{
 		controller:'userList',
@@ -13,13 +26,16 @@ angular.module('appRoute',['ngRoute','userController'])
 	/*begin 用户管理*/
 	.when('/userList',{
 		controller:'userList',
-		templateUrl : sysUserTempRoot.append('user_list.html').toString()
+		templateUrl : sysUserTempRoot.append('list.html').toString()
 	})
 	/*end 用户管理*/
 
-	.otherwise({
+/*	.otherwise({
         redirectTo: '/userList'
-    })
+    })*/
     ;
-});
+})
+
+
+;
 
