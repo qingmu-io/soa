@@ -1,4 +1,4 @@
-angular.module('userController',['sysServiceModule'])
+angular.module('userController',['sysServiceModule','cookieModule'])
 
 //处理登录请求
 .controller('login',['$scope','userService',function($scope,userService){
@@ -14,8 +14,8 @@ angular.module('userController',['sysServiceModule'])
 			};
 }])
 
-.controller('userList',['$scope','userService',function($scope,userService){
-	
+.controller('userList',['$scope','userService','cookieService','$routeParams'
+                        ,function($scope,userService,cookieService,$routeParams){
 	$scope.user={username:'',phone:''};
 	$scope.metas = ['姓名','邮箱','电话号码','状态','管理员','创建时间'];
 	$scope.users  = userService.page($scope.user).rows;

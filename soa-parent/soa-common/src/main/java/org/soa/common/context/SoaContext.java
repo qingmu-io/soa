@@ -13,6 +13,7 @@ import java.util.Map;
  */
 public class SoaContext implements Serializable {
 	private static final long serialVersionUID = 1L;
+	private static final int PAGESIZE = 0;
 	/**
 	 * 服务名称
 	 */
@@ -54,6 +55,45 @@ public class SoaContext implements Serializable {
 	 * 返回数据
 	 */
 	private List<Map<String, Object>> rows = new ArrayList<Map<String, Object>>();
+	/**总页数*/
+	private int totalPage;
+	/**最多显示页码*/
+	private final Integer SHOWPAGE = 6;
+	/**
+	 * 页面中的起始页
+	 */
+  	private Integer startpage;// 
+  	/**
+  	 * 页面中的结束页
+  	 */
+  private Integer endpage;// 
+	
+	  public SoaContext paginationTool() {
+          /** 计算总页数 */
+          this.totalPage = this.total % PAGESIZE == 0 ? this.total / PAGESIZE : this.total
+                          / PAGESIZE + 1;
+          /** 计算startpage与endpage的值 */
+          // 如果当前页数小于最大显示数，则全部显示，当前页从0开始
+          if (this.total < this.SHOWPAGE) {
+                  this.startpage = 1;
+                  this.endpage = this.totalPage;
+          } else {
+                  /** else中是总页数大于SHOWPAGES的情况 */
+                  if (this.page <= SHOWPAGE / 2 + 1) {
+                          this.startpage = 1;
+                          this.endpage = this.SHOWPAGE;
+                  } else {
+                          this.startpage = this.page - (SHOWPAGE / 2);
+                          this.endpage = this.page + (SHOWPAGE / 2 - 1);
+                          if (this.endpage >= this.totalPage) {
+                                  this.endpage = this.totalPage;
+                                  this.startpage = this.totalPage - SHOWPAGE + 1;
+                          }
+                  }
+          }
+          return this;
+  }
+	
 
 	public String getService() {
 		return service;
@@ -149,5 +189,47 @@ public class SoaContext implements Serializable {
 	public String getStringAttr(String key){
 		return (String) this.rows.get(0).get(key);
 	}
+
+
+	public int getTotalPage() {
+		return totalPage;
+	}
+
+
+	public void setTotalPage(int totalPage) {
+		this.totalPage = totalPage;
+	}
+
+
+	public Integer getStartpage() {
+		return startpage;
+	}
+
+
+	public void setStartpage(Integer startpage) {
+		this.startpage = startpage;
+	}
+
+
+	public Integer getEndpage() {
+		return endpage;
+	}
+
+
+	public void setEndpage(Integer endpage) {
+		this.endpage = endpage;
+	}
+
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
+	public Integer getSHOWPAGE() {
+		return SHOWPAGE;
+	}
+	
+	
 
 }

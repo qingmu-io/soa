@@ -13,6 +13,7 @@ var directiveTempRoot = new StringBuffer().append("/soa-rest/template/directive/
 window.import("modules/sys/service/sysService");
 window.import("modules/directive");
 window.import("modules/sys/controller/userController");
+window.import("modules/cookieService");
 
 angular.module('appRoute',['ngRoute','userController','soaDirective'])
 .config(function($routeProvider){
@@ -24,15 +25,15 @@ angular.module('appRoute',['ngRoute','userController','soaDirective'])
 		templateUrl : tempRoot.append('table.html').toString()
 	})
 	/*begin 用户管理*/
-	.when('/userList',{
+	.when('/userList/:pageNo',{
 		controller:'userList',
 		templateUrl : sysUserTempRoot.append('list.html').toString()
 	})
 	/*end 用户管理*/
 
-/*	.otherwise({
-        redirectTo: '/userList'
-    })*/
+	.otherwise({
+        redirectTo: '/userList/1'
+    })
     ;
 })
 
