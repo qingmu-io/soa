@@ -61,7 +61,7 @@ public abstract class BaseService {
 	}
 
 	public SoaContext queryByPage(SoaContext context) {
-		return queryByPage(context, getNameSpace());
+		return queryByPage(context, getNameSpace()).paginationTool();
 	}
 
 	public SoaContext query(SoaContext context, String namespace,

@@ -33,9 +33,8 @@ public class UserServiceImpl extends BaseService implements UserService {
 	@Override
 	public SoaContext page(SoaContext context) {
 		context.setLimit(1);
-		context.setPage(1);
 		super.queryByPage(context);
-		return context.paginationTool();
+		return context;
 	}
 
 }

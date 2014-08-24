@@ -1,34 +1,28 @@
-var pageHtml = '<div class="pagination pagination-centered pagination-small">\
-	 					<ul>\
-						<li><a href="#/{{name}}" >上一页</a></li>';
-		
-						'<li ng-repeat=><a href="#">1</a></li>';
-						
-	pageHtml+='<li><a href="#">下一页</a></li>\
-						</ul>\
-				</div>';
 angular.module('soaDirective',[])
 .directive('page',function(){
-	
     return {
         restrict : 'E',
-        template : pageHtml,
+        templateUrl : '/soa-rest/template/directive/page.html',
         controller:['$scope',function($scope){
-        	$scope.pageNo=1;
-        	$scope.name="123"; 
-        	$scope.pageNoList = [];
-        
-        	
-        	
-        }],
-        link: function(scope, element, attrs,controller){
-        	var begin = parseInt(attrs.begin);
-        	var end = attrs.end;
-        	for(var i = begin;i<=end;i++){
-        		scope.pageNoList.push(i);
+        	$scope.pages = [];
+        	for(var i=context.startpage;i<=context.endpage;i++){
+        		var map = {};
+        		map.i=i;
+        		if(context.page === i)
+        		map.class='active';
+        		$scope.pages.push(map);
         	}
-        	console.log(scope.pageNoList);
+        }],
+        link: function(scope, element, attrs){
         }
 };
+})
+.directive('table',function(){
+	return {
+		restrict : 'E'
+		,templateUrl :'/soa-rest/template/directive/table.html'
+		,controller : ['$scope',function($scope){
+			
+		}]	
+	};
 });
-

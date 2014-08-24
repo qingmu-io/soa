@@ -57,6 +57,7 @@ window.Validata = {};
 		return isPass;
 	};
 	
+	
 }(jQuery, window);
 	
 	

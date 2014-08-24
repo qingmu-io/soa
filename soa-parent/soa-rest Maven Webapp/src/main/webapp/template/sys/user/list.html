@@ -11,6 +11,7 @@
 <div>
 	<label><button class="btn btn-success">新增</button></label>
 </div>
+<!-- <table></table> -->
 <table class="table table-hover table-bordered table-condensed">
 	<thead>
 		<tr >
@@ -18,7 +19,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr ng-repeat="user in users">
+		<tr ng-repeat="user in context.rows">
 			<td>{{user.username}}</td>
 			<td>{{user.email}}</td>
 			<td>{{user.mobilePhoneNumber}}</td>
@@ -26,26 +27,8 @@
 			<td>{{user.admin}}</td>
 			<td>{{user.createDate}}</td>
 		</tr>
-<!-- 		<tr class="success">
-			<td>1</td>
-			<td>TB - Monthly</td>
-			<td>01/04/2012</td>
-			<td>Approved</td>
-		</tr> -->
-		
 	</tbody>
 </table>
-<page begin="1" end="5"></page>
-<!-- <div class="pagination pagination-centered pagination-small">
-	<ul>
-		<li><a href="#">上一页</a></li>
-		<li><a href="">1</a></li>
-		<li><a href="#">2</a></li>
-		<li><a href="#">3</a></li>
-		<li><a href="#">4</a></li>
-		<li><a href="#">5</a></li>
-		<li><a href="#">下一页</a></li>
-	</ul>
-</div> -->
+<page></page>
 
 </div>

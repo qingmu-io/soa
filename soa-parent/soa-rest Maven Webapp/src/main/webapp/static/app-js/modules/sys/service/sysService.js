@@ -13,7 +13,7 @@ angular.module('sysServiceModule',['cookieModule'])
 				return context;
 			},
 			page : function(context){
-				cookieService.set('pageNo',1);
+				context.page = cookieService.get('page');
 				context.service = userService;
 				context.method="page";
 				Request.sync_ajax_get(url,context,function(_context){context=_context;});

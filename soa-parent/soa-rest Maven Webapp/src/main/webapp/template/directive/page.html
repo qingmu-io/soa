@@ -1,13 +1,13 @@
-<page>
-<div class="pagination pagination-centered pagination-small">
+ <div class="pagination pagination-centered pagination-small" id="page">
 	<ul>
-		<li><a href="#">上一页</a></li>
-		<li><a href="#">{{name}}</a></li>
-		<li><a href="#">2</a></li>
-		<li><a href="#">3</a></li>
-		<li><a href="#">4</a></li>
-		<li><a href="#">5</a></li>
-		<li><a href="#">下一页</a></li>
+		<li>
+		<a href="#/userList/{{context.page-1}}" ng-if="context.page-1 > 0">上一页</a>
+		<a href="#/userList/1" ng-if="context.page-1 == 0">上一页</a>
+		</li>
+		<li ng-repeat="page in pages" class="{{page.class}}"><a href="#/userList/{{page.i}}" >{{page.i}}</a></li>
+		<li>
+		<a href="#/userList/{{context.page+1}}" ng-if="context.page+1 < context.totalPage">下一页</a>
+		<a href="#/userList/{{context.totalPage}}" ng-if="context.page+1 >= context.totalPage">下一页</a>
+		</li>
 	</ul>
-</div>
-</page>
+</div> 

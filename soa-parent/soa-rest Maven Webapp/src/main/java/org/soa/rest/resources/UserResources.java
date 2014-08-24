@@ -5,6 +5,7 @@ import java.util.Enumeration;
 import javax.servlet.http.HttpServletRequest;
 
 import org.soa.common.context.SoaContext;
+import org.soa.logger.SoaLogger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +27,7 @@ public class UserResources {
 	@RequestMapping(value="/sys/invoker"
 					,method={RequestMethod.GET,RequestMethod.POST})
 	public SoaContext login(@ModelAttribute SoaContext context,HttpServletRequest request) {
+		final long begin  = System.currentTimeMillis();
 		final Enumeration<String> names = request.getParameterNames();
 		while (names.hasMoreElements()) {
 			String key = names.nextElement();
@@ -34,6 +36,7 @@ public class UserResources {
 			context.addAttr(key, request.getParameter(key));
 		}
 		context = soaManger.callNoTx(context);
+		SoaLogger.debug(getClass(), "service {} in method {} =================================执行时间{}ms",context.getService(),context.getMethod(), System.currentTimeMillis()-begin);
 		return context;
 	}
 	

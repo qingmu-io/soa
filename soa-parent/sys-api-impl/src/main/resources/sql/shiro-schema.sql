@@ -24,7 +24,7 @@ create table `sys_user`(
   `mobile_phone_number`  char(11),
   `password`  varchar(100),
   `salt`       varchar(10),
-  `create_date` timestamp default 0,
+  `create_date` timestamp default now(),
   `status`    varchar(50),
   `deleted`   bool,
   `admin`     bool,

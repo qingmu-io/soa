@@ -13,7 +13,6 @@ import java.util.Map;
  */
 public class SoaContext implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private static final int PAGESIZE = 0;
 	/**
 	 * 服务名称
 	 */
@@ -69,10 +68,10 @@ public class SoaContext implements Serializable {
   private Integer endpage;// 
 	
 	  public SoaContext paginationTool() {
-          /** 计算总页数 */
-          this.totalPage = this.total % PAGESIZE == 0 ? this.total / PAGESIZE : this.total
-                          / PAGESIZE + 1;
-          /** 计算startpage与endpage的值 */
+          /* 计算总页数 */
+          this.totalPage = this.total % this.limit == 0 ? this.total / limit : this.total
+                          / limit + 1;
+          /* 计算startpage与endpage的值 */
           // 如果当前页数小于最大显示数，则全部显示，当前页从0开始
           if (this.total < this.SHOWPAGE) {
                   this.startpage = 1;
