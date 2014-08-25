@@ -61,11 +61,11 @@ public class SoaContext implements Serializable {
 	/**
 	 * 页面中的起始页
 	 */
-  	private Integer startpage;// 
+  	private Integer startpage;
   	/**
   	 * 页面中的结束页
   	 */
-  private Integer endpage;// 
+  private Integer endpage;
 	
 	  public SoaContext paginationTool() {
           /* 计算总页数 */
@@ -73,12 +73,12 @@ public class SoaContext implements Serializable {
                           / limit + 1;
           /* 计算startpage与endpage的值 */
           // 如果当前页数小于最大显示数，则全部显示，当前页从0开始
-          if (this.total < this.SHOWPAGE) {
+          if (this.totalPage < this.SHOWPAGE) {
                   this.startpage = 1;
                   this.endpage = this.totalPage;
           } else {
                   /** else中是总页数大于SHOWPAGES的情况 */
-                  if (this.page <= SHOWPAGE / 2 + 1) {
+                  if (this.totalPage <= SHOWPAGE / 2 + 1) {
                           this.startpage = 1;
                           this.endpage = this.SHOWPAGE;
                   } else {

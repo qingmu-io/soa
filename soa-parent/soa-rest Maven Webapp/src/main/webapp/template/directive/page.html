@@ -4,7 +4,7 @@
 		<a href="#/userList/{{context.page-1}}" ng-if="context.page-1 > 0">上一页</a>
 		<a href="#/userList/1" ng-if="context.page-1 == 0">上一页</a>
 		</li>
-		<li ng-repeat="page in pages" class="{{page.class}}"><a href="#/userList/{{page.i}}" >{{page.i}}</a></li>
+		<li ng-repeat="page in pages" class="{{page.active}}"><a href="#/userList/{{page.i}}" >{{page.i}}</a></li>
 		<li>
 		<a href="#/userList/{{context.page+1}}" ng-if="context.page+1 < context.totalPage">下一页</a>
 		<a href="#/userList/{{context.totalPage}}" ng-if="context.page+1 >= context.totalPage">下一页</a>

@@ -15,6 +15,7 @@ angular.module('sysServiceModule',['cookieModule'])
 			page : function(context){
 				context.page = cookieService.get('page');
 				context.service = userService;
+				context.limit = 5;
 				context.method="page";
 				Request.sync_ajax_get(url,context,function(_context){context=_context;});
 				return context;

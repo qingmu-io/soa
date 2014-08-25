@@ -19,7 +19,6 @@ public class UserServiceImpl extends BaseService implements UserService {
 	
 	public  SoaContext insert(SoaContext context){
 		context.addAttr("salt",IdUtil.salt());
-		
 		context.addAttr("createDate", new Timestamp(System.currentTimeMillis()));
 		super.insert(context);
 		return context;
@@ -32,7 +31,6 @@ public class UserServiceImpl extends BaseService implements UserService {
 	
 	@Override
 	public SoaContext page(SoaContext context) {
-		context.setLimit(1);
 		super.queryByPage(context);
 		return context;
 	}
