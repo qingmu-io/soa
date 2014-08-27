@@ -1,8 +1,9 @@
 var userService = "userService";
 var url = new StringBuffer().append(Constants.root).append("/sys/invoker").toString();
-angular.module('sysServiceModule',['cookieModule'])
+angular.module('sysServiceModule',[])
 /*系统模块中 user服务*/
-.service('userService',['cookieService',function(cookieService){
+.service('userService',[function(){
+	alert('userService init..')
 		var methods =  {
 				/*用户登录方法*/
 			login:function(context){
@@ -13,7 +14,7 @@ angular.module('sysServiceModule',['cookieModule'])
 				return context;
 			},
 			page : function(context){
-				context.page = cookieService.get('page');
+				context.page = SOA.page;
 				context.service = userService;
 				context.limit = 5;
 				context.method="page";
@@ -21,7 +22,7 @@ angular.module('sysServiceModule',['cookieModule'])
 				return context;
 			}
 		};
-	return methods;	
+		return methods;
 }])
 .service('roleService',[function(){
 	var methods = {};

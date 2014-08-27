@@ -1,5 +1,5 @@
 
-angular.module('userController',['sysServiceModule','cookieModule','soaDirective'])
+angular.module('userControllerModule',['sysServiceModule'])
 
 //处理登录请求
 .controller('login',['$scope','userService',function($scope,userService){
@@ -12,26 +12,27 @@ angular.module('userController',['sysServiceModule','cookieModule','soaDirective
 				 window.location="/soa-rest/index.html";
 		}
 	});
+	
 }])
 
-.controller('users',['$scope','userService','cookieService','$routeParams'
-               ,function($scope,userService,cookieService,$routeParams){
+.controller('users',['$scope','userService','$routeParams'
+               ,function($scope,userService,$routeParams){
+	SOA.page = $routeParams.page;
 	$scope.user={username:'',phone:''};
-	console.log(context)
-	cookieService.set('page',$routeParams.page);
 	$scope.metas = ['姓名','邮箱','电话号码','状态','管理员','创建时间'];
-	window.context = $scope.context = userService.page($scope.user);
-	window.context.path='users';
-	console.log(userService.page($scope.user));
+	SOA.CTX = $scope.context = userService.page($scope.user);
+	$scope.users = SOA.CTX.rows;
+	SOA.path='users';
+		/*console.log(userService.page($scope.user));*/
 }])
 
 .controller('userAdd',['$scope','userService',function($scpoe,userService){
 		$scpoe.user={
 				
 		};
-		angular.element('#insert').bind('click',function(){
+	/*	angular.element('#insert').bind('click',function(){
 			
-		});
+		});*/
 }])
 
 .controller('moduleController',function($scope){
@@ -42,12 +43,4 @@ angular.module('userController',['sysServiceModule','cookieModule','soaDirective
 	];
 })
 
-
-//日期格式化过滤器
-.filter('dateformat',function(){
-		return function(date){
-			console.log(date);
-			return new Date(date).toLocaleString();
-		};
-})
 ;

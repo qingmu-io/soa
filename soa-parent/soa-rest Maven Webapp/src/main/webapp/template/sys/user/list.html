@@ -3,7 +3,7 @@
 	<fieldset >
 		<legend>用户列表</legend>
 			<label >姓名 <input type="text" ng-model="user.username" class="input-small" /></label>
-			<label >time<input type="time" ng-model="user.phone" class="input-small" /></label>
+			<label >time<input type="TEXT" ng-model="user.phone" class="input-small" /></label>
 			<button class="btn" ng-click="page">提交</button>
 	</fieldset>
 </div>
@@ -18,14 +18,14 @@
 			<th ng-repeat="meta in metas">{{meta}}</th>
 		</tr>
 	</thead>
-	<tbody>asdad
+	<tbody>
 		<tr ng-repeat="user in context.rows">
-			<td>{{user.username}}ads</td>
-			<td>{{user.email}}ad</td>
-			<td>{{user.mobilePhoneNumber}}ada</td>
-			<td>{{user.status}}ada</td>
-			<td>{{user.admin}}ada</td>
-			<td>{{user.createDate | dateformat}}asd</td>
+			<td>{{user.username}}</td>
+			<td>{{user.email}}</td>
+			<td>{{user.mobilePhoneNumber}}</td>
+			<td>{{user.status}}</td>
+			<td>{{user.admin}}</td>
+			<td>{{user.createDate | dateformat}}</td>
 		</tr>
 	</tbody>
 </table>

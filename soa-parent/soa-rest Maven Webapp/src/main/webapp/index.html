@@ -1,6 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:ng="http://angularjs.org" id="ng-app" class="ng-app:applicationContext" ng-app="applicationContext">
 <head>
+		<!--[if lte IE 8]>
+       	<script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2pre/html5shiv.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/json2/20121008/json2.js"></script>
+        <script>
+          document.createElement('ng-include');
+          document.createElement('ng-pluralize');
+          document.createElement('ng-view');
+          document.createElement('page');
+			alert(1);
+          // Optionally these for CSS
+          document.createElement('ng:include');
+          document.createElement('ng:pluralize');
+          document.createElement('ng:view');
+        </script>
+      <![endif]-->
 <title>list</title>
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 <meta charset="UTF-8">
@@ -9,7 +24,7 @@
 	rel="stylesheet" media="screen">
 </head>
 
-<body ng-app="appRoute">
+<body>
 	<div class="container-fluid">
 		<div class="row-fluid">
 
@@ -94,29 +109,21 @@
 			</div>
 		</div>
 	</div>
-	<script src="/soa-rest/static/app-js/jquery.js"></script>
-	<script src="/soa-rest/static/app-js/commons/stringBuffer.js"></script>
-	<script src="/soa-rest/static/bootstrap/js/bootstrap.min.js"></script>
-	<script src="/soa-rest/static/app-js/angular.js"></script>
-	<script src="/soa-rest/static/app-js/angular-route.js"></script>
+	<script src="/soa-rest/static/app-js/lib/jquery.js"></script>
+	<script src="/soa-rest/static/app-js/lib/angular.min.js"></script>
+	<script src="/soa-rest/static/app-js/lib/angular-route.min.js"></script>
+	<script src="/soa-rest/static/app-js/lib/bootstrap.min.js"></script>
+	<script src="/soa-rest/static/app-js/lib/myLib.js"></script>
+
+	
 	<script src="/soa-rest/static/app-js/commons/Request.js"></script>
-	<script src="/soa-rest/static/app-js/commons/util.js"></script>
-	<script src="/soa-rest/static/app-js/commons/stringUtil.js"></script>
-	<script src="/soa-rest/static/app-js/commons/validata.js"></script>
-	<script src="/soa-rest/static/app-js/commons/constants.js"></script>
-	<script src="/soa-rest/static/app-js/commons/accordion.js"></script>
-	<script src="/soa-rest/static/app-js/commons/jquery.cookie.js"></script>
 	
-	<script src="/soa-rest/static/app-js/app.js"></script>
-<!-- 	 <script  src="/soa-rest/static/app-js/modules/directive.js"></script> 
-	 <script  src="/soa-rest/static/app-js/modules/sys/controller/userController.js"></script> 
-	 <script  src="/soa-rest/static/app-js/modules/sys/service/sysService.js"></script> 
-	
-	
-	 <script  src="/soa-rest/static/app-js/modules/cookieService.js"></script>  -->
-	 
-	 
-<!-- 	<script src="/soa-rest/static/require.js" data-main="/soa-rest/static/main"></script> -->
+	<script  src="/soa-rest/static/app-js/applicationContext.js"></script>
+	<script  src="/soa-rest/static/app-js/modules/sys/service/sysServiceModule.js"></script>
+	 <script  src="/soa-rest/static/app-js/modules/sys/controller/userControllerModule.js"></script>
+	<script  src="/soa-rest/static/app-js/modules/filter.js"></script>
+	<script  src="/soa-rest/static/app-js/modules/directive.js"></script>
+	<script src="/soa-rest/static/app-js/commons/validata/login_validata.js"></script>
 
 </body>
 </html>

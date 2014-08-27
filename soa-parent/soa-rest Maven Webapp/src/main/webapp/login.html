@@ -29,7 +29,7 @@
 					<div class="span12">
 						<div class="row-fluid">
 							<div class="span4"></div>
-							<div class="span4" ng-app="userController" >
+							<div class="span4" ng-app="applicationContext" >
 							
 								<form class="form-inline form-horizontal" ng-controller="login">
 									<fieldset>
@@ -69,20 +69,17 @@
 		</div>
 	</div>
 	
-	<script src="/soa-rest/static/app-js/jquery.js"></script>
-	<script src="/soa-rest/static/app-js/commons/stringBuffer.js"></script>
-	<script src="/soa-rest/static/app-js/angular.min.js"></script>
-	<script src="/soa-rest/static/app-js/angular-route.js"></script>
-	<script src="/soa-rest/static/bootstrap/js/bootstrap.min.js"></script>
-	<script src="/soa-rest/static/app-js/commons/util.js"></script>
-	<script src="/soa-rest/static/app-js/commons/stringUtil.js"></script>
-	<script src="/soa-rest/static/app-js/commons/validata.js"></script>
-	<script src="/soa-rest/static/app-js/commons/constants.js"></script>
-	<script src="/soa-rest/static/app-js/commons/accordion.js"></script>
-	<script src="/soa-rest/static/app-js/app.js"></script>
+	<script src="/soa-rest/static/app-js/lib/jquery.js"></script>
+	<script src="/soa-rest/static/app-js/lib/angular.min.js"></script>
+	<script src="/soa-rest/static/app-js/lib/angular-route.min.js"></script>
+	<script src="/soa-rest/static/app-js/lib/bootstrap.min.js"></script>
+	<script src="/soa-rest/static/app-js/lib/myLib.js"></script>
 	<script src="/soa-rest/static/app-js/commons/Request.js"></script>
-	<script  src="/soa-rest/static/app-js/modules/sys/service/sysService.js"></script>
-	<script  src="/soa-rest/static/app-js/modules/sys/controller/userController.js"></script>
+	<script  src="/soa-rest/static/app-js/applicationContext.js"></script>
+	<script  src="/soa-rest/static/app-js/modules/sys/service/sysServiceModule.js"></script>
+	 <script  src="/soa-rest/static/app-js/modules/sys/controller/userControllerModule.js"></script>
+	<script  src="/soa-rest/static/app-js/modules/filter.js"></script>
+	<script  src="/soa-rest/static/app-js/modules/directive.js"></script>
 	<script src="/soa-rest/static/app-js/commons/validata/login_validata.js"></script>
 	<script type="text/javascript">
 		Validata.bind(document.forms[0]);

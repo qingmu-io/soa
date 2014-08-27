@@ -29,7 +29,7 @@
 
 	<!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->
 	<bean id="fastJsonHttpMessageConverter"
-		class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+		class="org.soa.rest.jsonp.FastJsonHttpMessageConverter">
 		<property name="supportedMediaTypes">
 			<list>
 				<value>application/json;charset=UTF-8</value>
@@ -40,7 +40,7 @@
 		   <list>
 		   		<value>WriteNullBooleanAsFalse</value>
 		   		 <value>QuoteFieldNames</value>  
-                <value>WriteDateUseDateFormat</value>  
+               <!--  <value>WriteDateUseDateFormat</value>   -->
                 <value>WriteNullStringAsEmpty</value>  
 		   </list>
 		</property>
