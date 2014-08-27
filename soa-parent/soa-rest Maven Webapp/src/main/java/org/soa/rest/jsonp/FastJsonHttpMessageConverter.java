@@ -22,7 +22,7 @@ public class FastJsonHttpMessageConverter extends com.alibaba.fastjson.support.s
 
     @Override
     protected void writeInternal(Object obj, HttpOutputMessage outputMessage) throws IOException, HttpMessageNotWritableException {
-    		
+    		System.out.println("========================================================");
     	if (obj instanceof JSONPObject) {
             JSONPObject jsonp = (JSONPObject) obj;
             OutputStream out = outputMessage.getBody();
@@ -34,5 +34,8 @@ public class FastJsonHttpMessageConverter extends com.alibaba.fastjson.support.s
             super.writeInternal(obj, outputMessage);
         }
     }
+    public FastJsonHttpMessageConverter() {
+		System.out.println("init");
+	}
     
 }

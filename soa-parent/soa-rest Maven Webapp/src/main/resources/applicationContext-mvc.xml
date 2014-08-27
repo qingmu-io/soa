@@ -13,8 +13,11 @@
     http://code.alibabatech.com/schema/dubbo 
 	http://code.alibabatech.com/schema/dubbo/dubbo.xsd
     ">
-    <mvc:annotation-driven />
-    
+<mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
+	<mvc:message-converters register-defaults="false">
+		<ref bean="fastJsonHttpMessageConverter"/>
+	</mvc:message-converters>
+</mvc:annotation-driven> 
     <context:property-placeholder location="classpath:application.properties" file-encoding="utf-8"/>
  	<dubbo:annotation package="${basePackage}"/>
  	<dubbo:registry protocol="zookeeper" address="${zkaddress}" />
@@ -25,9 +28,6 @@
  	
  	<mvc:default-servlet-handler/>
    <!--  <mvc:resources mapping="/static/**" location="/static/"/> -->
- 	
-
-	<!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->
 	<bean id="fastJsonHttpMessageConverter"
 		class="org.soa.rest.jsonp.FastJsonHttpMessageConverter">
 		<property name="supportedMediaTypes">
@@ -45,22 +45,17 @@
 		   </list>
 		</property>
 	</bean>
-
-	<!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->
-	<bean
-		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
-		<property name="messageConverters" ref="fastJsonHttpMessageConverter"/>
-	</bean>
-	<!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
-	<bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix">
-			<value>/WEB-INF/views/</value>
-		</property>
-		<property name="suffix">
-			<value>.html</value>
-		</property>
-	</bean>
+	
+   <bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+    <property name="favorPathExtension" value="true" />
+    <property name="ignoreAcceptHeader" value="false" /> 
+    <property name="mediaTypes" >
+        <value>
+            json=application/json
+            xml=application/xml
+        </value>
+    </property>
+</bean>
 	
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

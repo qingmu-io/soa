@@ -32,15 +32,13 @@ public class UserResources {
 		final Enumeration<String> names = request.getParameterNames();
 		while (names.hasMoreElements()) {
 			String key = names.nextElement();
-			System.out.println("key:"+key+" -------------  value:"+request.getParameter(key));
 			if(key.intern() == "method".intern() ||key.intern() == "service".intern()) continue;
 			context.addAttr(key, request.getParameter(key));
 		}
 		context = soaManger.callNoTx(context);
-		SoaLogger.debug(getClass(), "service {} in method {} =================================执行时间{}ms",context.getService(),context.getMethod(), System.currentTimeMillis()-begin);
+		SoaLogger.debug(getClass(), "service {} in method {}执行时间{}ms",context.getService(),context.getMethod(), System.currentTimeMillis()-begin);
 		return new JSONPObject(callback,context);
 	}
-	
 	
 	
 	@RequestMapping(value="/views/{url}",method={RequestMethod.GET,RequestMethod.POST})

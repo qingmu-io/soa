@@ -18,7 +18,6 @@
 		<javassist.version>3.12.1.GA</javassist.version>
 		<netty.version>3.2.5.Final</netty.version>
 		<zookeeper.version>3.4.6</zookeeper.version>
-		<jackson.version>1.9.13</jackson.version>
 
 		<redis.client.version>2.4.2</redis.client.version>
 		<spring-security.version>3.2.4.RELEASE</spring-security.version>
@@ -279,18 +278,6 @@
 				<version>${redis.client.version}</version>
 			</dependency>
 			<!-- end redis client -->
-			<!-- begin jackson -->
-			<dependency>
-				<groupId>org.codehaus.jackson</groupId>
-				<artifactId>jackson-core-asl</artifactId>
-				<version>${jackson.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.codehaus.jackson</groupId>
-				<artifactId>jackson-mapper-asl</artifactId>
-				<version>${jackson.version}</version>
-			</dependency>
-			<!-- end jackson -->
 
 
 			<!--begin log -->
@@ -410,7 +397,7 @@
 				<version>${quartz.version}</version>
 			</dependency>
 
-			<!-- google guava 集合 IO Strings 。�? -->
+			<!-- google guava 集合 IO Strings 。�? -->
 			<dependency>
 				<groupId>com.google.guava</groupId>
 				<artifactId>guava</artifactId>
