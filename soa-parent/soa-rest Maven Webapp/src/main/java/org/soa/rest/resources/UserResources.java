@@ -1,6 +1,7 @@
 package org.soa.rest.resources;
 
 import java.util.Enumeration;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -27,7 +28,7 @@ public class UserResources {
 	@ResponseBody
 	@RequestMapping(value="/sys/invoker"
 					,method={RequestMethod.GET,RequestMethod.POST})
-	public JSONPObject login(@ModelAttribute SoaContext context,HttpServletRequest request,String callback) {
+	public JSONPObject login(@ModelAttribute SoaContext context,HttpServletRequest request,String callback,Map<String,String> param) {
 		final long begin  = System.currentTimeMillis();
 		final Enumeration<String> names = request.getParameterNames();
 		while (names.hasMoreElements()) {
@@ -35,6 +36,7 @@ public class UserResources {
 			if(key.intern() == "method".intern() ||key.intern() == "service".intern()) continue;
 			context.addAttr(key, request.getParameter(key));
 		}
+		System.out.println(context.getService());
 		context = soaManger.callNoTx(context);
 		SoaLogger.debug(getClass(), "service {} in method {}执行时间{}ms",context.getService(),context.getMethod(), System.currentTimeMillis()-begin);
 		return new JSONPObject(callback,context);

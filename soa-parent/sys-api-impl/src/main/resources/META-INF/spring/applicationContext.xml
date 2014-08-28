@@ -13,7 +13,7 @@
 	<context:property-placeholder location="classpath:appliacation.properties" />
 	<dubbo:annotation package="${basePackage}" />
 	<dubbo:registry protocol="zookeeper" address="${zkaddress}" />
-		
+	<dubbo:protocol></dubbo:protocol>	
 		
 		<aop:config proxy-target-class="true" expose-proxy="false"/>
 		<!-- 启用aspectj 使用CGLib动态代理技术织入增强 -->

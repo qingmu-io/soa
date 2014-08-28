@@ -11,8 +11,6 @@ import java.io.OutputStream;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.converter.HttpMessageNotWritableException;
 
-import com.alibaba.fastjson.JSON;
-
 /**
  * 支持JSONP的Fastjson的消息转换器
  * @author liuyi
@@ -26,12 +24,11 @@ public class FastJsonHttpMessageConverter extends com.alibaba.fastjson.support.s
     	if (obj instanceof JSONPObject) {
             JSONPObject jsonp = (JSONPObject) obj;
             OutputStream out = outputMessage.getBody();
-            String text = jsonp.getFunction() + "(" + JSON.toJSONString(jsonp.getJson(), getFeatures()) + ")";
-            System.out.println(text);
-            byte[] bytes = text.getBytes(getCharset());
-            out.write(bytes);
+//            String text = jsonp.getFunction() + "(" + JSON.toJSONString(jsonp.getJson(), getFeatures()) + ")";
+            super.writeInternal(jsonp.getJson(), outputMessage);
+//            out.write(bytes);
         } else {
-            super.writeInternal(obj, outputMessage);
+        	super.writeInternal(obj, outputMessage);
         }
     }
     public FastJsonHttpMessageConverter() {
