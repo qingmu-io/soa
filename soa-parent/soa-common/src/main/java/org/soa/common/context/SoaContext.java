@@ -186,7 +186,7 @@ public class SoaContext implements Serializable {
 		this.attr.remove(key);
 	}
 	public String getStringAttr(String key){
-		return (String) this.rows.get(0).get(key);
+		return (String) this.attr.get(key);
 	}
 
 
@@ -229,6 +229,11 @@ public class SoaContext implements Serializable {
 		return SHOWPAGE;
 	}
 	
-	
+	public static SoaContext newSoaContext(String service,String method){
+		SoaContext context = new SoaContext();
+		context.setService(service);
+		context.setMethod(method);
+		return context;
+	}
 
 }

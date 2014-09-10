@@ -1,4 +1,4 @@
-package org.quartz.api;
+package org.soa.quartz.api;
 
 import org.quartz.JobDetail;
 import org.quartz.Trigger;

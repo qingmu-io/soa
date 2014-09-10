@@ -9,7 +9,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.core.io.DefaultResourceLoader;
-import org.springframework.stereotype.Service;
+
+import com.alibaba.dubbo.config.annotation.Service;
 
 /**
  * 以静态变量保存Spring ApplicationContext, 可在任何代码任何地方任何时候取出ApplicaitonContext.

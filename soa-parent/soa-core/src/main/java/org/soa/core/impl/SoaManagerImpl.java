@@ -7,42 +7,32 @@ import org.soa.common.core.SoaManger;
 import org.soa.common.exception.AppException;
 import org.soa.core.SoaService;
 import org.soa.core.exception.SysException;
-import org.soa.logger.SoaLogger;
+import org.springframework.transaction.TransactionDefinition;
 
 public abstract class SoaManagerImpl implements SoaManger {
 	@Resource
 	private SoaService soaService;
+	
 	/*
 	 * (non-Javadoc)
-	 * 
+	 * @see org.soa.common.core.SoaManger#invokeNoTx(org.soa.common.context.SoaContext)
+	 * 直接进行调用 不开启事物
+	 * @param context
+	 * @return
+	 */
+	 
+	@Override
+	public SoaContext invokeNoTx(SoaContext context) {
+		return soaService.invoke(context);
+	}
+	
+	/*
+	 * (non-Javadoc)
 	 * @see org.soa.core.SoaManger#invoke(org.soa.common.context.SoaContext)
 	 */
 	@Override
 	public SoaContext invoke(SoaContext context) {
-		return callTx(context, 0);
-	}
-	public SoaManagerImpl() {
-		SoaLogger.debug(this.getClass(), "******************************************soa service init");
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.soa.core.SoaManger#call(org.soa.common.context.SoaContext)
-	 */
-	@Override
-	public SoaContext call(SoaContext context) {
-		return soaService.invoke(context);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.soa.core.SoaManger#invokeNoTx(org.soa.common.context.SoaContext)
-	 */
-	@Override
-	public SoaContext invokeNoTx(SoaContext context) {
-		return soaService.invoke(context);
+		return callTx(context, TransactionDefinition.PROPAGATION_REQUIRED);
 	}
 
 	/*
@@ -52,7 +42,8 @@ public abstract class SoaManagerImpl implements SoaManger {
 	 */
 	@Override
 	public SoaContext callNoTx(SoaContext context) {
-		return callTx(context, 4);
+		//4
+		return callTx(context, TransactionDefinition.PROPAGATION_NOT_SUPPORTED);
 	}
 
 	/*
@@ -62,11 +53,11 @@ public abstract class SoaManagerImpl implements SoaManger {
 	 */
 	@Override
 	public SoaContext callNewTx(SoaContext context) {
-		return callTx(context, 3);
+		//3
+		return callTx(context, TransactionDefinition.PROPAGATION_REQUIRES_NEW);
 	}
 
 	private SoaContext callTx(SoaContext context, int txType) {
-
 		if (context == null) {
 			throw new SysException("SoaSoa: Service Service is error");
 		}
@@ -76,10 +67,9 @@ public abstract class SoaManagerImpl implements SoaManger {
 		if (context.getMethod() == null) {
 			throw new SysException("SoaSoa: Service's method is null !!");
 		}
-		SoaContext info = new SoaContext();
 		try {
 			context.addAttr("transactionType", Integer.valueOf(txType));
-			info = this.soaService.invoke(context);
+			context = this.soaService.invoke(context);
 		} catch (Exception e) {
 			if ((e instanceof AppException)) {
 				throw ((AppException) e);
@@ -88,7 +78,7 @@ public abstract class SoaManagerImpl implements SoaManger {
 						+ e.getMessage());
 			}
 		}
-		return info;
+		return context;
 	}
 
 }

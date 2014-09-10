@@ -49,7 +49,7 @@
 		SELECT count(*) FROM qrtz_job_details WHERE Job_name =#{jobName};
 	</select>
 	<select id="countQrtzCronTriggers" parameterType="map" resultType="int">
-		SELECT count(*) FROM qrtz_cron_triggers WHERE Job_name =#{trigger_name};
+		SELECT count(*) FROM qrtz_cron_triggers WHERE trigger_name =#{trigger_name};
 	</select>
 	<select id="countJobClass" parameterType="map" resultType="int">
 		SELECT count(*) FROM qrtz_job_details WHERE Job_class_name =#{clazz};
@@ -65,7 +65,7 @@
 		,TRIGGER_NAME 		<!-- 触发器名称 -->
 		,TRIGGER_GROUP 		<!-- 触发器分组 -->
 		,STATUS  			<!-- 作业状态 1运行 -1 暂停 -->
-		,create_time datatime<!-- 创建时间 -->
+		,create_time 		<!-- 创建时间 -->
 		,create_author		<!-- 创建人 -->
 		)values(
 		#{guid}

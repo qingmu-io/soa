@@ -420,5 +420,6 @@
 		<module>quartz-api</module>
 		<module>quartz-api-impl</module>
     <module>soa-util</module>
+    <module>quartz-resource</module>
   </modules>
 </project>

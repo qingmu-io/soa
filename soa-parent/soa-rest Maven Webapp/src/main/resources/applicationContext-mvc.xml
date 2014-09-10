@@ -29,7 +29,7 @@
  	<mvc:default-servlet-handler/>
    <!--  <mvc:resources mapping="/static/**" location="/static/"/> -->
 	<bean id="fastJsonHttpMessageConverter"
-		class="org.soa.rest.jsonp.FastJsonHttpMessageConverter">
+		class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
 		<property name="supportedMediaTypes">
 			<list>
 				<value>application/json;charset=UTF-8</value>

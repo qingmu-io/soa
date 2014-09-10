@@ -13,13 +13,9 @@
 	<context:property-placeholder location="classpath:appliacation.properties" />
 	
 	<dubbo:annotation package="${basePackage}" />
+	
 	<dubbo:registry protocol="zookeeper" address="${zkaddress}" />
-	<dubbo:protocol port="1888"/>
 	
-	<aop:config proxy-target-class="true" expose-proxy="false" />
-	
-	<!-- 启用aspectj 使用CGLib动态代理技术织入增强 -->
-	<aop:aspectj-autoproxy proxy-target-class="true" />
 	<!-- DataSource -->
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
 		init-method="init" destroy-method="close">
@@ -50,6 +46,8 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean class="org.soa.core.holder.SpringContextHolder"/>
 
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
@@ -66,6 +64,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="quartzProperties" ref="quartzProperties" />
 	</bean>
+	
 	<util:properties id="quartzProperties">
 		<prop key="org.quartz.scheduler.instanceName">soaClusteredScheduler</prop>
 		<prop key="org.quartz.scheduler.instanceId">AUTO</prop>

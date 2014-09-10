@@ -1,4 +1,4 @@
-package org.quartz.api.job;
+package org.soa.quartz.api.job;
 
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;

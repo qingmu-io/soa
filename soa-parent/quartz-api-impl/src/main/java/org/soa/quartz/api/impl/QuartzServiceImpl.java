@@ -1,14 +1,14 @@
-package org.quartz.api.impl;
+package org.soa.quartz.api.impl;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 import org.quartz.JobDetail;
 import org.quartz.Trigger;
-import org.quartz.api.QuartzService;
 import org.soa.common.context.SoaContext;
 import org.soa.common.exception.QuartzException;
 import org.soa.core.service.BaseService;
+import org.soa.quartz.api.QuartzService;
 import org.soa.quartz.core.QuartzManger;
 import org.soa.quartz.core.Status;
 import org.springframework.stereotype.Service;

@@ -22,13 +22,13 @@ import com.alibaba.dubbo.config.annotation.Reference;
 @RequestMapping
 public class UserResources {
 	
-	@Reference(version = "1.0.0",interfaceClass=SysSoaManger.class,timeout=2000,check=true)
+	@Reference(version = "1.0.0",interfaceClass=SysSoaManger.class,timeout=2000,check=true,lazy=false)
 	private SysSoaManger soaManger;
 
 	@ResponseBody
 	@RequestMapping(value="/sys/invoker"
 					,method={RequestMethod.GET,RequestMethod.POST})
-	public JSONPObject login(@ModelAttribute SoaContext context,HttpServletRequest request,String callback,Map<String,String> param) {
+	public JSONPObject invork(@ModelAttribute SoaContext context,HttpServletRequest request,String callback,Map<String,String> param) {
 		final long begin  = System.currentTimeMillis();
 		final Enumeration<String> names = request.getParameterNames();
 		while (names.hasMoreElements()) {
