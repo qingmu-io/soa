@@ -12,5 +12,4 @@ public final class Status {
 	public PlatformTransactionManager txManager;
 	public boolean needRollback = false;
 	
-	
 }

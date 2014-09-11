@@ -437,6 +437,5 @@
 		<module>quartz-api-impl</module>
 		<module>soa-util</module>
 		<module>quartz-resource</module>
-		<module>soa-restful-support</module>
 	</modules>
 </project>
