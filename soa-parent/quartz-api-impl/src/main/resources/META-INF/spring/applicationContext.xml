@@ -9,13 +9,13 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
-	
+
 	<context:property-placeholder location="classpath:appliacation.properties" />
-	
+
 	<dubbo:annotation package="${basePackage}" />
-	
+
 	<dubbo:registry protocol="zookeeper" address="${zkaddress}" />
-	
+
 	<!-- DataSource -->
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
 		init-method="init" destroy-method="close">
@@ -46,8 +46,7 @@
 			</list>
 		</property>
 	</bean>
-	
-	<bean class="org.soa.core.holder.SpringContextHolder"/>
+
 
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
@@ -64,7 +63,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="quartzProperties" ref="quartzProperties" />
 	</bean>
-	
+
 	<util:properties id="quartzProperties">
 		<prop key="org.quartz.scheduler.instanceName">soaClusteredScheduler</prop>
 		<prop key="org.quartz.scheduler.instanceId">AUTO</prop>
@@ -80,6 +79,16 @@
 		<prop key="org.quartz.jobStore.misfireThreshold">60000</prop>
 	</util:properties>
 
+	<bean id="ehcacheManager"
+		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+		<property name="configLocation" value="classpath:ehcache.xml" />
+	</bean>
+
+	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+		<property name="cacheManager" ref="ehcacheManager" />
+		<property name="transactionAware" value="true" />
+	</bean>
+
 
 	<!-- 启用spring 监控 -->
 	<bean id="druid-stat-interceptor"
@@ -90,7 +99,6 @@
 		scope="prototype">
 		<property name="patterns">
 			<list>
-				<value>cn.seafood.service.*</value>
 				<value>com.mysql.*</value>
 			</list>
 		</property>

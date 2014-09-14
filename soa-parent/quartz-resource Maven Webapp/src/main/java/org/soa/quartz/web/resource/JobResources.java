@@ -29,7 +29,7 @@ public class JobResources {
 		
 		@ResponseBody
 		@RequestMapping(value="/jobs/{page}",method=RequestMethod.GET)
-		public SoaContext page(HttpServletRequest request){
+		public SoaContext page(@PathVariable("page") int page,HttpServletRequest request){
 			SoaContext context = SoaContext.newSoaContext(JOBSERVICE, PAGE);
 			Map<String, String[]> parameterMap = request.getParameterMap();
 			if(parameterMap!=null){
@@ -37,6 +37,7 @@ public class JobResources {
 					context.addAttr(entry.getKey(), entry.getValue()[0]);
 				}
 			}
+			context.setPage(page);
 			return soaManager.invokeNoTx(context);
 		}
 		

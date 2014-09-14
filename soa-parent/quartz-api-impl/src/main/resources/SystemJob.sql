@@ -1,5 +1,7 @@
+create database job;
+use job;
 CREATE TABLE t_sys_Job(
-	 GUID int
+	 GUID int primary key not null
 	,JOB_NAME VARCHAR(50)
 	,JOB_GROUP VARCHAR(50)
 	,CLAZZ VARCHAR(50)

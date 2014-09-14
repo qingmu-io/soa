@@ -13,11 +13,7 @@
 	<context:property-placeholder location="classpath:appliacation.properties" />
 	<dubbo:annotation package="${basePackage}" />
 	<dubbo:registry protocol="zookeeper" address="${zkaddress}" />
-	<dubbo:protocol></dubbo:protocol>	
 		
-		<aop:config proxy-target-class="true" expose-proxy="false"/>
-		<!-- 启用aspectj 使用CGLib动态代理技术织入增强 -->
-		<aop:aspectj-autoproxy proxy-target-class="true" />
 	<!-- 加载 properties -->
 	<!-- DataSource -->
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
@@ -72,7 +68,6 @@
 		scope="prototype">
 		<property name="patterns">
 			<list>
-				<value>cn.seafood.service.*</value>
 				<value>com.mysql.*</value>
 			</list>
 		</property>

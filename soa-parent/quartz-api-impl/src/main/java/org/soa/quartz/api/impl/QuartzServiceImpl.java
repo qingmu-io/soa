@@ -1,6 +1,5 @@
 package org.soa.quartz.api.impl;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 import org.quartz.JobDetail;
@@ -29,10 +28,6 @@ public class QuartzServiceImpl extends BaseService implements QuartzService {
 	@Resource
 	private QuartzManger quartzManger;
 	
-	@PostConstruct
-	public void init(){
-		this.quartzManger.start();
-	}
 	
 	@Override
 	public SoaContext modifyJob(SoaContext context) {
