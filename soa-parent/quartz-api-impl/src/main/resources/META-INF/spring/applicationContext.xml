@@ -79,15 +79,30 @@
 		<prop key="org.quartz.jobStore.misfireThreshold">60000</prop>
 	</util:properties>
 
-	<bean id="ehcacheManager"
-		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
-		<property name="configLocation" value="classpath:ehcache.xml" />
-	</bean>
+	<bean class="org.soa.core.holder.SpringContextHolder"/>
 
-	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
-		<property name="cacheManager" ref="ehcacheManager" />
-		<property name="transactionAware" value="true" />
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxTotal" value="200"/>
+		<property name="maxWaitMillis" value="2000"/>
 	</bean>
+	
+	<bean id="jedisPool" class="redis.clients.jedis.JedisPool">
+		<constructor-arg index="0" ref="jedisPoolConfig"/>
+		<constructor-arg index="1" value="172.60.1.65"/>
+	</bean>
+	
+	<bean id="jdkSerializeImpl" class="org.soa.core.cache.serialize.JdkSerializeImpl"/>
+	
+	<bean id="redisCache" class="org.soa.core.cache.redis.RedisCacheFactoryBean">
+			<property name="jedisPool" ref="jedisPool"/>
+			<property name="serialize" ref="jdkSerializeImpl"/>
+	</bean>
+	
+	<bean class="org.soa.core.cache.redis.RedisCacheManger">
+			<property name="cache" ref="redisCache"/>
+			<property name="transactionAware" value="true"></property>
+	</bean>
+	
 
 
 	<!-- 启用spring 监控 -->

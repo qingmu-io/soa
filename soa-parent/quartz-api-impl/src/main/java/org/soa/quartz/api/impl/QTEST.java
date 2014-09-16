@@ -27,8 +27,8 @@ public class QTEST {
 	 */
 	@PostConstruct
 	public void test(){
-	/*	SoaContext context = new SoaContext();
-		context.addAttr("guid", "ADFASFDKAKJasdflkjdfa");
+		SoaContext context = new SoaContext();
+		context.addAttr("guid", 1);
 		context.addAttr("jobName", "adfa");
 		context.addAttr("jobGroup", "fghgfh");
 		context.addAttr("status", 1);
@@ -38,7 +38,7 @@ public class QTEST {
 		context.addAttr("cronExpression", "0/5 * * * * ?");
 		context.setService("quartzService");
 		context.setMethod("addJob");
-		quartzSoaManager.invoke(context);*/
+//		quartzSoaManager.invoke(context);
 	}
 
 }
