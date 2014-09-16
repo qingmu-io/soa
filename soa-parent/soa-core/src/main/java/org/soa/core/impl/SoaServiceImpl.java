@@ -3,8 +3,10 @@ package org.soa.core.impl;
 import java.lang.reflect.Method;
 
 import org.soa.common.context.SoaContext;
+import org.soa.common.exception.AppException;
 import org.soa.core.SoaService;
 import org.soa.core.Status;
+import org.soa.core.exception.SysException;
 import org.soa.core.holder.SpringContextHolder;
 import org.soa.logger.SoaLogger;
 import org.springframework.stereotype.Service;
@@ -24,11 +26,21 @@ public final class SoaServiceImpl implements SoaService {
 					SoaContext.class);
 			result = (SoaContext) method.invoke(service, context);
 			if (result != null && !result.isSuccess())
-				throw new invokerFailException();
+				throw new InvokerFailException();
+		} 
+		catch (InvokerFailException ex) {
+			if (status != null)
+				status.needRollback = true;
 		} catch (Throwable e) {
-			SoaLogger.error(getClass(), "调用服务{}中的{}方法出现错误 :{}",
-					context.getService(), context.getMethod(), e);
-		} finally {
+			e.printStackTrace();
+			if (status != null) {
+				status.needRollback = true;
+			}
+			if ((e.getCause() instanceof AppException)) {
+				throw (AppException)e.getCause();
+			}
+			throw new SysException("service invoke error", e);
+		}finally {
 			endTX(status);
 		}
 		return result;
@@ -90,7 +102,7 @@ public final class SoaServiceImpl implements SoaService {
 
 }
 
-class invokerFailException extends RuntimeException {
+class InvokerFailException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 	public Throwable fillInStackTrace() {
 		return this;
