@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 @Service("quartzService")
 public class QuartzServiceImpl extends BaseService implements QuartzService {
 	private final static String QUARTZ = "QUARTZ";
-	private final static String PAUSEALL = "pauseAll";
 	private static final String RESUMEALL = "resumeAll";
 	private static final String LOAD = "load";
 	//通过作业名称统计作业个数
@@ -92,14 +91,16 @@ public class QuartzServiceImpl extends BaseService implements QuartzService {
 	@Override
 	public SoaContext pauseAll(SoaContext context) {
 		this.quartzManger.pauseAll();
-		this.update(context, PAUSEALL);
+		context.addAttr("STATUS", -1);
+		this.update(context);
 		return context;
 	}
 
 	@Override
 	public SoaContext resumeAll(SoaContext context) {
 		this.quartzManger.resumeAll();
-		this.update(context, RESUMEALL);
+		context.addAttr("STATUS", 1);
+		this.update(context);
 		return context;
 	}
 

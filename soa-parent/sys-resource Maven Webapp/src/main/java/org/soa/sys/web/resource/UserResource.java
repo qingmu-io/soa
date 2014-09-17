@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.sys.api.croe.SysSoaManger;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.google.common.collect.Maps;
 /**
  * 
  * @author liuyi
@@ -39,10 +38,8 @@ public class UserResource {
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public SoaContext login(String username, String password) {
 		final SoaContext context = SoaContext.newSoaContext(USERSERVICE, LOGIN);
-		final Map<String, Object> attr = Maps.newHashMap();
-		attr.put("username", username);
-		attr.put("password", password);
-		context.setAttr(attr);
+		context.addAttr("username", username);
+		context.addAttr("password", password);
 		return soaManger.invokeNoTx(context);
 	}
 

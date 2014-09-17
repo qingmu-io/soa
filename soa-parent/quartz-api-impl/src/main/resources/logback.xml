@@ -4,11 +4,17 @@
 	<!-- 控制台输出 -->
 	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
-			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %msg%n</pattern>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{90} - %msg%n</pattern>
 		</encoder>
 	</appender>
 		<logger name="org.apache.zookeeper.ClientCnxn" level="INFO" additivity="false">
 			<appender-ref ref="STDOUT" />
+		</logger>
+		<logger name="org.springframework.scheduling.quartz.LocalDataSourceJobStore" level="error" additivity="false" >
+			<appender-ref ref="STDOUT"/>
+		</logger>
+		<logger name="org.quartz.core.QuartzSchedulerThread" level="error" additivity="false" >
+			<appender-ref ref="STDOUT"/>
 		</logger>
 	<root level="debug">
 		<appender-ref ref="stdout" />

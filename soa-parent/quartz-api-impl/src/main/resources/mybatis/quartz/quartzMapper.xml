@@ -3,7 +3,7 @@
 <mapper namespace="QUARTZ">
 	<sql id="sql">
 		SELECT
-		GUID as guid			<!-- guid -->
+		id as id			<!-- id -->
 		,JOB_NAME as jobName			<!-- 作业名 -->
 		,JOB_GROUP as jobGroup		<!-- 作业分组 -->
 		,CLAZZ as clazz          	<!-- 作业类 -->
@@ -15,14 +15,8 @@
 		,create_author as createAuthor	<!-- 创建人 -->
 		FROM t_sys_job
 	</sql>
-	<select id="load" parameterType="map" resultType="map">
-		<include refid="sql" />
-		<where>
-			guid=#{guid}
-		</where>
-	</select>
-	<select id="query" parameterType="map" resultType="map">
-		<include refid="sql" />
+	
+	<sql id="where">
 		<where>
 			<if test="jobName !=null and jobName != '' ">
 				and job_name = '%${jobName}%'
@@ -43,6 +37,20 @@
 				and status = #{status}
 			</if>
 		</where>
+	</sql>
+	<select id="load" parameterType="map" resultType="map">
+		<include refid="sql" />
+		<where>
+			id=#{id}
+		</where>
+	</select>
+	<select id="query" parameterType="map" resultType="map">
+		<include refid="sql" />
+		<include refid="where"/>
+	</select>
+	<select id="count" parameterType="map" resultType="int">
+		select count(*) from t_sys_job <include refid="where"/>
+		
 	</select>
 	
 	<select id="countQrtzJobDetails" parameterType="map" resultType="int">
@@ -57,7 +65,7 @@
 	
 	<insert id="insert" parameterType="map">
 		INSERT INTO t_sys_job(
-		GUID 				<!-- guid -->
+		ID 				<!-- id -->
 		,JOB_NAME 			<!-- 作业名 -->
 		,JOB_GROUP 			<!-- 作业分组 -->
 		,CLAZZ             	<!-- 作业类 -->
@@ -68,7 +76,7 @@
 		,create_time 		<!-- 创建时间 -->
 		,create_author		<!-- 创建人 -->
 		)values(
-		#{guid}
+		#{id}
 		,#{jobName}
 		,#{jobGroup}
 		,#{clazz}
@@ -84,26 +92,26 @@
 	<delete id="delete" parameterType="map">
 		DELETE FROM t_sys_job
 		<where>
-			guid = #{guid}
+			id = #{id}
 		</where>
 	</delete>
 
 	<update id="update" parameterType="map">
 		UPDATE t_sys_job
 		<set>
-			<if test="jobName !=null and jobName != '' ">
+			<if test="jobName !=null and jobName !='' ">
 				job_name = #{jobName}
 			</if>
-			<if test="jobGroup != null and jobGroup!='' ">
+			<if test="jobGroup !=null and jobGroup!='' ">
 				job_group = #{jobGroup}
 			</if>
-			<if test="cronExpression != null and cronExpression != '' ">
+			<if test="cronExpression !=null and cronExpression !='' ">
 				cron_expression = #{cronExpression}
 			</if>
-			<if test="triggerName != null and triggerName != '' ">
+			<if test="triggerName !=null and triggerName !='' ">
 				trigger_name = #{triggerName}
 			</if>
-			<if test="triggerGroup != null and triggerGroup != '' ">
+			<if test="triggerGroup !=null and triggerGroup !='' ">
 				trigger_group = #{triggerGroup}
 			</if>
 			<if test="status != null and status != '' ">
@@ -111,7 +119,7 @@
 			</if>
 		</set>
 		<where>
-			guid=#{guid}
+			id=#{id}
 		</where>
 	</update>
 </mapper>

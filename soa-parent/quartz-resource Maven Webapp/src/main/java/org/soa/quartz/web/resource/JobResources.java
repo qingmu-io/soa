@@ -36,9 +36,10 @@ public class JobResources {
 				for(Map.Entry<String, String[]> entry : parameterMap.entrySet()){
 					context.addAttr(entry.getKey(), entry.getValue()[0]);
 				}
+			
 			}
 			context.setPage(page);
-			return soaManager.invokeNoTx(context);
+			return soaManager.invoke(context);
 		}
 		
 		@ResponseBody

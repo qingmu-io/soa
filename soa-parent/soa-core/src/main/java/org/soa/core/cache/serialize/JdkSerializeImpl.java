@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 public class JdkSerializeImpl implements ISerialize {
 
 	public byte[] serialize(Object object) {
+		if(object == null )return null;
 		// 序列化
 		try (ByteArrayOutputStream bos = new ByteArrayOutputStream();
 				ObjectOutputStream oos = new ObjectOutputStream(bos)) {

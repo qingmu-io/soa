@@ -28,17 +28,17 @@ public class QTEST {
 	@PostConstruct
 	public void test(){
 		SoaContext context = new SoaContext();
-		context.addAttr("guid", 1);
+/*		context.addAttr("guid", 1);
 		context.addAttr("jobName", "adfa");
-		context.addAttr("jobGroup", "fghgfh");
+		context.addAttr("jobGroup", "fghgfh");*/
 		context.addAttr("status", 1);
-		context.addAttr("triggerName", "triggerName");
+/*		context.addAttr("triggerName", "triggerName");
 		context.addAttr("triggerGroup", "triggerGroup");
 		context.addAttr("clazz", "org.soa.quartz.api.job.TestJob");
-		context.addAttr("cronExpression", "0/5 * * * * ?");
+		context.addAttr("cronExpression", "0/5 * * * * ?");*/
 		context.setService("quartzService");
-		context.setMethod("addJob");
-//		quartzSoaManager.invoke(context);
+		context.setMethod("pauseAll");
+		quartzSoaManager.invoke(context);
 	}
 
 }

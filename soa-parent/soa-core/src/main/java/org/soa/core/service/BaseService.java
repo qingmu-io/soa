@@ -78,6 +78,8 @@ public abstract class BaseService {
 		}
 		return context;
 	}
+	
+	
 
 	public SoaContext queryStatement(SoaContext context, String statement) {
 		return query(context, getNameSpace(), statement);
@@ -170,7 +172,9 @@ public abstract class BaseService {
 		}
 		return context;
 	}
+	
 
+	
 	public SoaContext update(SoaContext context) {
 		return this.update(context, getNameSpace());
 	}

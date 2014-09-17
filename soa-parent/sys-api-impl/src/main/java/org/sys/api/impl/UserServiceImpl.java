@@ -12,6 +12,7 @@ import org.sys.api.UserService;
 public class UserServiceImpl extends BaseService implements UserService {
 	private static final String LOGIN = "login";
 	private static final String NAMESPACE="USER";
+	
 	@Override
 	public SoaContext login(SoaContext context) {
 		return super.queryStatement(context, LOGIN);
