@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 @Service("quartzService")
 public class QuartzServiceImpl extends BaseService implements QuartzService {
 	private final static String QUARTZ = "QUARTZ";
-	private static final String RESUMEALL = "resumeAll";
 	private static final String LOAD = "load";
 	//通过作业名称统计作业个数
 	private static final String COUNTQRTJOBDETAILS = "countQrtzJobDetails";
@@ -137,6 +136,13 @@ public class QuartzServiceImpl extends BaseService implements QuartzService {
 			
 		}
 		return context;
+	}
+
+	@Override
+	public SoaContext dynamicAddJob(SoaContext context) {
+		
+		
+		return null;
 	}
 	
 

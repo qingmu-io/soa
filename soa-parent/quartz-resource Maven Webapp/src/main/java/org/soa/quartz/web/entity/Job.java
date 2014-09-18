@@ -16,7 +16,6 @@ public class Job {
 	private String cronExpression;
 	private String triggerName;
 	private String triggerGroup;
-	
 	/**
 	 * 1 表示运行中 -1暂停中
 	 */

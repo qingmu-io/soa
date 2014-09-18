@@ -14,6 +14,9 @@ import org.soa.common.context.SoaContext;
  */
 public interface QuartzService {
 	
+	
+	public SoaContext dynamicAddJob(SoaContext context);
+	
 	public SoaContext addJob(SoaContext context);
 	
         /**

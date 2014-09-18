@@ -57,7 +57,7 @@
 	</bean>
 
 	
-
+		<bean class="org.soa.core.holder.SpringContextHolder"/>
 
 	<!-- 启用spring 监控 -->
 	<bean id="druid-stat-interceptor"

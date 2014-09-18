@@ -6,7 +6,5 @@ public class Start {
 	public static void main(String[] args) {
 		Main.main(args);
 		
-/*		ClassPathXmlApplicationContext context
-		 = new ClassPathXmlApplicationContext("classpath:./META-INF/spring/applicationContext.xml");*/
 	}
 }
