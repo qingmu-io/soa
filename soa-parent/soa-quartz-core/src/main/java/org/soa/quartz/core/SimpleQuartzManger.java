@@ -3,7 +3,6 @@ package org.soa.quartz.core;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 import org.quartz.CronScheduleBuilder;
@@ -36,10 +35,6 @@ public class SimpleQuartzManger implements QuartzManger {
 	@Resource
 	private Scheduler scheduler;
 	
-	@PostConstruct
-	public void syso() {
-		System.out.println("通过spring注入的schefuler + " + this.scheduler);
-	}
 
 	/* (non-Javadoc)
 	 * @see org.soa.quartz.core.QuartzManger#addJob(org.soa.common.context.SoaContext)

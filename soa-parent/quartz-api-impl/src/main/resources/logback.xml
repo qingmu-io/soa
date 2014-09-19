@@ -10,12 +10,12 @@
 		<logger name="org.apache.zookeeper.ClientCnxn" level="INFO" additivity="false">
 			<appender-ref ref="STDOUT" />
 		</logger>
-		<logger name="org.springframework.scheduling.quartz.LocalDataSourceJobStore" level="error" additivity="false" >
+		<!-- <logger name="org.springframework.scheduling.quartz.LocalDataSourceJobStore" level="error" additivity="false" >
 			<appender-ref ref="STDOUT"/>
 		</logger>
 		<logger name="org.quartz.core.QuartzSchedulerThread" level="error" additivity="false" >
 			<appender-ref ref="STDOUT"/>
-		</logger>
+		</logger> -->
 	<root level="debug">
 		<appender-ref ref="stdout" />
 		<!-- <appender-ref ref="file—debug" /> <appender-ref ref="file—error" /> 

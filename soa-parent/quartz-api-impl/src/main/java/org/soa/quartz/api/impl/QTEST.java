@@ -1,19 +1,33 @@
 package org.soa.quartz.api.impl;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Date;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import javax.tools.JavaCompiler;
+import javax.tools.ToolProvider;
 
+import org.quartz.Calendar;
+import org.quartz.Job;
+import org.quartz.JobDataMap;
+import org.quartz.JobDetail;
+import org.quartz.JobExecutionContext;
+import org.quartz.Scheduler;
+import org.quartz.Trigger;
+import org.quartz.TriggerKey;
 import org.soa.common.context.SoaContext;
-import org.soa.quartz.api.QuartzService;
 import org.soa.quartz.api.manger.QuartzSoaManager;
 import org.springframework.stereotype.Service;
 
-import com.alibaba.dubbo.common.extension.SPI;
+import com.alibaba.dubbo.common.compiler.support.AdaptiveCompiler;
+import com.alibaba.dubbo.common.compiler.support.JavassistCompiler;
 
-@Service
+//@Service
 public class QTEST {
 	
-	@Resource
+//	@Resource
 	private QuartzSoaManager quartzSoaManager;
 	
 	/**
@@ -25,20 +39,49 @@ public class QTEST {
 	private String triggerName;
 	private String triggerGroup;
 	 */
-	@PostConstruct
+//	@PostConstruct
 	public void test(){
+		
+
+//		JavaFileObject fileObject = new DynamicCompile.JavaStringObject("Hello", writer.toString()); 
+		
+		this.main2();
+		
 		SoaContext context = new SoaContext();
-/*		context.addAttr("guid", 1);
-		context.addAttr("jobName", "adfa");
-		context.addAttr("jobGroup", "fghgfh");*/
+		context.addAttr("guid", 1);
+		context.addAttr("jobName", "jobname");
+		context.addAttr("jobGroup", "jobgroup");
 		context.addAttr("status", 1);
-/*		context.addAttr("triggerName", "triggerName");
-		context.addAttr("triggerGroup", "triggerGroup");
-		context.addAttr("clazz", "org.soa.quartz.api.job.TestJob");
-		context.addAttr("cronExpression", "0/5 * * * * ?");*/
+		context.addAttr("triggerName", "triggerName2");
+		context.addAttr("triggerGroup", "triggerGroup3");
+		context.addAttr("clazz", "org.soa.quartz.api.job.Job2");
+		context.addAttr("cronExpression", "0/5 * * * * ?");
 		context.setService("quartzService");
-		context.setMethod("pauseAll");
+//		context.setMethod("pauseAll");
+		context.setMethod("addJob");
 		quartzSoaManager.invoke(context);
+	}
+	
+	public static void main2()  {
+		
+		try {
+			String src = "package org.soa.quartz.api.job;"+
+
+"public class Job3 implements org.quartz.Job {"+
+"	public void execute(org.quartz.JobExecutionContext context)"+
+"			throws org.quartz.JobExecutionException {"+
+"			System.out.println(\"我是动态添加的job\");"+
+"	}"+
+"}";
+			JavassistCompiler compiler2 = new JavassistCompiler();
+			final Class<?> clazz = compiler2.compile(src,ClassLoader.getSystemClassLoader());
+			final Object newInstance = Class.forName("org.soa.quartz.api.job.Job3").newInstance();
+			System.out.println(newInstance);
+			final Method method = clazz.getMethod("execute", JobExecutionContext.class);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

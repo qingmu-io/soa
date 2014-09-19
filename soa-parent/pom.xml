@@ -15,7 +15,8 @@
 		<mysql.driver.version>5.1.31</mysql.driver.version>
 		<druid.version>1.0.7</druid.version>
 
-		<dubbo.version>2.5.4-SNAPSHOT</dubbo.version>
+		<!-- <dubbo.version>2.5.4-SNAPSHOT</dubbo.version> -->
+		<dubbo.version>2.5.3</dubbo.version>
 		<javassist.version>3.12.1.GA</javassist.version>
 		<netty.version>3.2.10.Final</netty.version>
 		<zookeeper.version>3.4.6</zookeeper.version>

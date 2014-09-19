@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FileUtils;
 import org.soa.common.context.SoaContext;
+import org.soa.common.restful.util.MapUtil;
 import org.soa.quartz.api.manger.QuartzSoaManager;
 import org.soa.quartz.web.entity.Job;
 import org.springframework.stereotype.Controller;
@@ -50,8 +51,10 @@ public class JobResources {
 		
 		@ResponseBody
 		@RequestMapping(value="/jobs",method=RequestMethod.POST)
-		public SoaContext insert(@ModelAttribute Job job){
-			SoaContext context = SoaContext.newSoaContext(JOBSERVICE, INSERT);
+		public SoaContext insert(@ModelAttribute Job job,HttpServletRequest request){
+			final SoaContext context = SoaContext.newSoaContext(JOBSERVICE, "dynamicAddJob");
+			context.setAttr(MapUtil.mapUtil.objToMap(job));
+			context.addAttr("src", request.getParameter("src"));
 			return soaManager.invoke(context);
 		}
 		
@@ -70,6 +73,7 @@ public class JobResources {
 			return soaManager.invoke(context);
 		}
 		
+		@ResponseBody
 		@RequestMapping(value="/upload",method=RequestMethod.POST)
 		public SoaContext uploadJavaFile(@RequestParam("file")MultipartFile file) throws IOException{
 				SoaContext context = SoaContext.newSoaContext(JOBSERVICE, "dynamicAddJob");

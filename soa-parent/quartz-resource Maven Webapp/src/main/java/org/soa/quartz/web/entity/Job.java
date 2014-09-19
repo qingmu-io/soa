@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 
 public class Job {
 	
-	private int guid;
+	private int id;
 	private String jobName;
 	private String jobGroup;
 	private String clazz;
@@ -22,11 +22,12 @@ public class Job {
 	private int status;
 	private Timestamp createTime;
 	private String crateAuthor;
-	public int getGuid() {
-		return guid;
+
+	public int getId() {
+		return id;
 	}
-	public void setGuid(int guid) {
-		this.guid = guid;
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getJobName() {
 		return jobName;
