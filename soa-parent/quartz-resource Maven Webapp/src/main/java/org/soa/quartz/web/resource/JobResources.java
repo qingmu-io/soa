@@ -52,7 +52,7 @@ public class JobResources {
 		@ResponseBody
 		@RequestMapping(value="/jobs",method=RequestMethod.POST)
 		public SoaContext insert(@ModelAttribute Job job,HttpServletRequest request){
-			final SoaContext context = SoaContext.newSoaContext(JOBSERVICE, "dynamicAddJob");
+			final SoaContext context = SoaContext.newSoaContext(JOBSERVICE, "addJob");
 			context.setAttr(MapUtil.mapUtil.objToMap(job));
 			context.addAttr("src", request.getParameter("src"));
 			return soaManager.invoke(context);

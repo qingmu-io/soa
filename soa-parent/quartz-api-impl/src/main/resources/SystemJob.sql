@@ -1,7 +1,7 @@
 create database job;
 use job;
 CREATE TABLE t_sys_Job(
-	 ID int primary key not null
+	 ID int auto_increment primary key not null 
 	,JOB_NAME VARCHAR(50)
 	,JOB_GROUP VARCHAR(50)
 	,CLAZZ VARCHAR(50)
@@ -9,6 +9,7 @@ CREATE TABLE t_sys_Job(
 	,TRIGGER_NAME VARCHAR(50)
 	,TRIGGER_GROUP VARCHAR(50)
 	,STATUS BIGINT
+	,job_src mediumText
 	,create_time DATETIME
 	,create_author VARCHAR(50)
-);
+)CHARSET=utf8;

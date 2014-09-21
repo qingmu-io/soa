@@ -1,33 +1,21 @@
 package org.soa.quartz.api.impl;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Date;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import javax.tools.JavaCompiler;
-import javax.tools.ToolProvider;
 
-import org.quartz.Calendar;
-import org.quartz.Job;
-import org.quartz.JobDataMap;
-import org.quartz.JobDetail;
 import org.quartz.JobExecutionContext;
-import org.quartz.Scheduler;
-import org.quartz.Trigger;
-import org.quartz.TriggerKey;
 import org.soa.common.context.SoaContext;
 import org.soa.quartz.api.manger.QuartzSoaManager;
 import org.springframework.stereotype.Service;
 
-import com.alibaba.dubbo.common.compiler.support.AdaptiveCompiler;
 import com.alibaba.dubbo.common.compiler.support.JavassistCompiler;
 
-//@Service
+@Service
 public class QTEST {
 	
-//	@Resource
+	@Resource
 	private QuartzSoaManager quartzSoaManager;
 	
 	/**
@@ -39,13 +27,17 @@ public class QTEST {
 	private String triggerName;
 	private String triggerGroup;
 	 */
-//	@PostConstruct
+	@PostConstruct
 	public void test(){
-		
+		String src2 = "package org.soa.quartz.api.job;"+
+				"public class Job6 implements org.quartz.Job {"+
+				"public void execute(org.quartz.JobExecutionContext context)"+
+				"throws org.quartz.JobExecutionException {"+
+				"System.out.println(\"我是动态添加的jobss\");"+
+				"}"+
+				"}";
 
-//		JavaFileObject fileObject = new DynamicCompile.JavaStringObject("Hello", writer.toString()); 
 		
-		this.main2();
 		
 		SoaContext context = new SoaContext();
 		context.addAttr("guid", 1);
@@ -54,12 +46,15 @@ public class QTEST {
 		context.addAttr("status", 1);
 		context.addAttr("triggerName", "triggerName2");
 		context.addAttr("triggerGroup", "triggerGroup3");
-		context.addAttr("clazz", "org.soa.quartz.api.job.Job2");
+		context.addAttr("clazz", "org.soa.quartz.api.job.Job6");
 		context.addAttr("cronExpression", "0/5 * * * * ?");
+		context.addAttr("src", src2);
 		context.setService("quartzService");
 //		context.setMethod("pauseAll");
-		context.setMethod("addJob");
+		context.setMethod("start");
 		quartzSoaManager.invoke(context);
+		context.setMethod("addJob");
+//		quartzSoaManager.invoke(context);
 	}
 	
 	public static void main2()  {

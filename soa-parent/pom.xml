@@ -427,7 +427,6 @@
 		<module>soa-common</module>
 		<module>soa-core</module>
 		<module>soa-web</module>
-		<module>soa-rest</module>
 		<module>sys-api</module>
 		<module>sys-api-impl</module>
 		<module>soa-spring-security</module>

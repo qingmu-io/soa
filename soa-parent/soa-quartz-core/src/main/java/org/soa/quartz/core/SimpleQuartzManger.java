@@ -42,20 +42,11 @@ public class SimpleQuartzManger implements QuartzManger {
 	@Override
 	public void addJob(SoaContext context) {
 		try {
-			this.scheduler.start();
-			final SchedulerContext context2 = this.scheduler.getContext();
-			final Iterator<Entry<String, Object>> iterator = context2.entrySet().iterator();
-			while(iterator.hasNext()){
-				final Entry<String, Object> next = iterator.next();
-				System.out.println(next.getKey() +" : " +next.getValue());
-			}
 			final JobKey jobKey = JobKey.jobKey(context.getStringAttr("jobName"));
 			final TriggerKey triggerKey = TriggerKey.triggerKey(context.getStringAttr("triggerName"));
 			if(
 			this.scheduler.checkExists(jobKey)
-			|| this.scheduler.checkExists(triggerKey)
-			
-					){
+			|| this.scheduler.checkExists(triggerKey)){
 				//表示该任务已经被添加进了quartz维护的数据表中
 			}else
 				scheduler.scheduleJob(buildJob(context), buildTrigger(context));
@@ -213,7 +204,7 @@ public class SimpleQuartzManger implements QuartzManger {
 			this.scheduler.start();
 			SoaLogger.debug(getClass(), "Quartz job srart success!~!");
 		} catch (SchedulerException e) {
-			SoaLogger.error(getClass(), "Quartz job srart error{}",e);
+			throw new QuartzException("Quartz job srart error{}",e);
 		}
 	}
 }

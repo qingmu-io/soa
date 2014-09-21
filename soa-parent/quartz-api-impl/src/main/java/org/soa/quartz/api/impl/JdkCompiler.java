@@ -7,23 +7,29 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.Arrays;
 import java.util.Stack;
 
 import javax.tools.JavaCompiler;
 import javax.tools.JavaFileObject;
 import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
-import javax.tools.JavaCompiler.CompilationTask;
 
 import org.quartz.Job;
 import org.quartz.JobExecutionException;
 import org.soa.logger.SoaLogger;
 import org.soa.quartz.core.QuartzManger;
 
-public class JdkCompiler   {
 
+public enum JdkCompiler   {
+	INSTA;
 	public final String basePath = System.getProperty("user.dir")+File.separator+"src";
 	
+	public void compile(java.util.List<String> list,java.util.List<String> list2){
+		for(int i=0;i<list.size();i++){
+			this.compile(list.get(i), list2.get(i));
+		}
+	}
 	
 	public void compile(String code,String className){
 		
@@ -69,7 +75,7 @@ public class JdkCompiler   {
 	}
 	
 	
-	public void loadClass(){
+	public  void loadClass(){
 		try {
 			 // 例如/usr/java/classes下有一个test.App类，则/usr/java/classes即这个类的根路径，而.class文件的实际位置是/usr/java/classes/test/App.class
 			 File clazzPath = new File(basePath);
@@ -90,6 +96,7 @@ public class JdkCompiler   {
 			 				return pathname.isDirectory() || pathname.getName().endsWith(".class");
 			 			}
 			 		});
+			 		
 			 		for (File subFile : classFiles) {
 			 			if (subFile.isDirectory()) {
 			 				stack.push(subFile);
@@ -103,19 +110,18 @@ public class JdkCompiler   {
 			 						}
 			 						// 设置类加载器
 			 						URLClassLoader classLoader = (URLClassLoader) ClassLoader.getSystemClassLoader();
-			 						// 将当前类路径加入到类加载器中
+			 						// 将当前类路径加入到类加载器 强制将累加入当前classpath中
 			 						method.invoke(classLoader, clazzPath.toURI().toURL());
 			 					} finally {
 			 						method.setAccessible(accessible);
 			 					}
 			 				}
 			 				// 文件名称
-//			 				String className = subFile.getAbsolutePath();
-//			 				className = className.substring(clazzPathLen, className.length() - 6);
-//			 				className = className.replace(File.separatorChar, '.');
+			 				String className = subFile.getAbsolutePath();
+			 				className = className.substring(clazzPathLen, className.length() - 6);
+			 				className = className.replace(File.separatorChar, '.');
 			 				// 加载Class类
-//			 				final Job newInstance = (Job)Class.forName(className).newInstance();
-//			 				SoaLogger.debug(QuartzManger.class,"读取应用程序类文件[class={"+className+"}]");
+			 				SoaLogger.debug(QuartzManger.class,"动态加载[class:{"+className+"}]");
 			 			}
 			 		}
 			 	}
@@ -132,11 +138,22 @@ public class JdkCompiler   {
 		"System.out.println(\"我是动态添加的jobss\");"+
 "}"+
 "}";
-		final JdkCompiler jdkCompiler = new JdkCompiler();
-		jdkCompiler.compile(src, "org.soa.quartz.api.job.Job5");
+		String src2 = "package liuyi.soa.quartz.api.job;"+
+				"public class Job5 implements org.quartz.Job {"+
+				"public void execute(org.quartz.JobExecutionContext context)"+
+				"throws org.quartz.JobExecutionException {"+
+				"System.out.println(\"我是动态添加的jobss\");"+
+				"}"+
+				"}";
+		
+		final JdkCompiler jdkCompiler = JdkCompiler.INSTA;
+		jdkCompiler.compile(Arrays.asList(src,src2),Arrays.asList("org.soa.quartz.api.job.Job5","liuyi.soa.quartz.api.job.Job5") );
+		jdkCompiler.compile(Arrays.asList(src,src2),Arrays.asList("org.soa.quartz.api.job.Job5","liuyi.soa.quartz.api.job.Job5") );
+		
+		
 		jdkCompiler.loadClass();
-		final Job job = (Job)Class.forName("org.soa.quartz.api.job.Job4").newInstance();
-		final Job job5 = (Job)Class.forName("org.soa.quartz.api.job.Job5").newInstance();
+		final Job job = (Job)Class.forName("liuyi.soa.quartz.api.job.Job5").newInstance();
+		final Job job5 = (Job)Class.forName("liuyi.soa.quartz.api.job.Job5").newInstance();
 		job.execute(null);
 		job5.execute(null);
 		

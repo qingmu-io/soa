@@ -6,11 +6,12 @@
 		id as id			<!-- id -->
 		,JOB_NAME as jobName			<!-- 作业名 -->
 		,JOB_GROUP as jobGroup		<!-- 作业分组 -->
-		,CLAZZ as clazz          	<!-- 作业类 -->
+		,CLAZZ as clazz          	<!-- 作业类名 -->
 		,CRON_EXPRESSION as cronExpression	<!-- 作业执行表达式 -->
 		,TRIGGER_NAME as triggerName	<!-- 触发器名称 -->
 		,TRIGGER_GROUP as triggerGroup	<!-- 触发器分组 -->
 		,STATUS as status	<!-- 作业状态 1运行 -1 暂停 -->
+		,JOB_SRC as src
 		,create_time as createTime<!-- 创建时间 -->
 		,create_author as createAuthor	<!-- 创建人 -->
 		FROM t_sys_job
@@ -36,6 +37,9 @@
 			<if test="status != null and status != '' ">
 				and status = #{status}
 			</if>
+			<if test="src !=null and src!='' ">
+				and job_src like '%${src}%'
+			</if>
 		</where>
 	</sql>
 	<select id="load" parameterType="map" resultType="map">
@@ -50,7 +54,6 @@
 	</select>
 	<select id="count" parameterType="map" resultType="int">
 		select count(*) from t_sys_job <include refid="where"/>
-		
 	</select>
 	
 	<select id="countQrtzJobDetails" parameterType="map" resultType="int">
@@ -63,6 +66,10 @@
 		SELECT count(*) FROM qrtz_job_details WHERE Job_class_name =#{clazz};
 	</select>
 	
+	<select id="listAll" resultType="map">
+		<include refid="sql"/>
+	</select>
+	
 	<insert id="insert" parameterType="map">
 		INSERT INTO t_sys_job(
 		ID 				<!-- id -->
@@ -73,6 +80,7 @@
 		,TRIGGER_NAME 		<!-- 触发器名称 -->
 		,TRIGGER_GROUP 		<!-- 触发器分组 -->
 		,STATUS  			<!-- 作业状态 1运行 -1 暂停 -->
+		,JOB_SRC
 		,create_time 		<!-- 创建时间 -->
 		,create_author		<!-- 创建人 -->
 		)values(
@@ -84,6 +92,7 @@
 		,#{triggerName}
 		,#{triggerGroup}
 		,#{status}
+		,#{src}
 		,#{createTime}
 		,#{createAuthor}
 		)
@@ -116,6 +125,9 @@
 			</if>
 			<if test="status != null and status != '' ">
 				status = #{status}
+			</if>
+			<if test="src != null and src != '' ">
+				job_src = #{src}
 			</if>
 		</set>
 		<where>

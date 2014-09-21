@@ -2,7 +2,7 @@ package org.soa;
 
 import com.alibaba.dubbo.container.Main;
 
-public class Start {
+public class StartQuartz {
 	public static void main(String[] args) {
 		Main.main(args);
 	}
