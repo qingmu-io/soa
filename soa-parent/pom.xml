@@ -432,7 +432,6 @@
 		<module>soa-spring-security</module>
 		<module>soa-logger</module>
 		<module>soa-shiro-security</module>
-		<module>soa-quartz-core</module>
 		<module>quartz-api</module>
 		<module>quartz-api-impl</module>
 		<module>soa-util</module>

@@ -27,7 +27,6 @@ import com.alibaba.dubbo.config.annotation.Reference;
 public class JobResources {
 		private final static String JOBSERVICE = "quartzService";
 		private final static String PAGE = "page";
-		private final static String INSERT = "insert";
 		private final static String UPDATE = "update";
 		
 		
@@ -35,15 +34,14 @@ public class JobResources {
 		private QuartzSoaManager soaManager;
 		
 		@ResponseBody
-		@RequestMapping(value="/jobs/{page}",method=RequestMethod.GET)
-		public SoaContext page(@PathVariable("page") int page,HttpServletRequest request){
+		@RequestMapping(value="/jobs/{page}/{limit}",method=RequestMethod.GET)
+		public SoaContext page(@PathVariable("page") int page,@PathVariable(value="limit")int limit,HttpServletRequest request){
 			SoaContext context = SoaContext.newSoaContext(JOBSERVICE, PAGE);
 			Map<String, String[]> parameterMap = request.getParameterMap();
 			if(parameterMap!=null){
 				for(Map.Entry<String, String[]> entry : parameterMap.entrySet()){
 					context.addAttr(entry.getKey(), entry.getValue()[0]);
 				}
-			
 			}
 			context.setPage(page);
 			return soaManager.invoke(context);
@@ -72,7 +70,6 @@ public class JobResources {
 			SoaContext context = SoaContext.newSoaContext(JOBSERVICE, UPDATE);
 			return soaManager.invoke(context);
 		}
-		
 		@ResponseBody
 		@RequestMapping(value="/upload",method=RequestMethod.POST)
 		public SoaContext uploadJavaFile(@RequestParam("file")MultipartFile file) throws IOException{

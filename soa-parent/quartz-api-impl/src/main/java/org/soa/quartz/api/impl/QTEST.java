@@ -52,7 +52,7 @@ public class QTEST {
 		context.setService("quartzService");
 //		context.setMethod("pauseAll");
 		context.setMethod("start");
-		quartzSoaManager.invoke(context);
+//		quartzSoaManager.invoke(context);
 		context.setMethod("addJob");
 //		quartzSoaManager.invoke(context);
 	}
