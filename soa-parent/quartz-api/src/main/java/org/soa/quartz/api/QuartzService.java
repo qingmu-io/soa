@@ -16,7 +16,7 @@ public interface QuartzService {
 	
 	
 	
-	public SoaContext addJob(SoaContext context);
+		public SoaContext addJob(SoaContext context);
 	
         /**
          * 
@@ -119,7 +119,7 @@ public interface QuartzService {
          * 
         * @Description: TODO(激活所有任务)
         * @author LiuYi
-        * @date 2014年7月10日 上午9:46:01
+        * @date 2014年7月10日 上午9:46:01 
         *  @  SoaContext
          */
         public abstract SoaContext resumeAll(SoaContext context);

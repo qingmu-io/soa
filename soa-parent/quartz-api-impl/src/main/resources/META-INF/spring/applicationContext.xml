@@ -11,6 +11,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<context:property-placeholder location="classpath:appliacation.properties" />
+	<dubbo:protocol name="dubbo" port="2" />
 
 	<dubbo:annotation package="${basePackage}" />
 

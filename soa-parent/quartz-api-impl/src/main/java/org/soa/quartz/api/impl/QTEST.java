@@ -1,10 +1,15 @@
 package org.soa.quartz.api.impl;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.lang.reflect.Method;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
+import org.apache.commons.io.FileUtils;
 import org.quartz.JobExecutionContext;
 import org.soa.common.context.SoaContext;
 import org.soa.quartz.api.manger.QuartzSoaManager;
@@ -26,9 +31,10 @@ public class QTEST {
 	private String cronExpression;
 	private String triggerName;
 	private String triggerGroup;
+	 * @throws IOException 
 	 */
 	@PostConstruct
-	public void test(){
+	public void test() throws IOException{
 		String src2 = "package org.soa.quartz.api.job;"+
 				"public class Job6 implements org.quartz.Job {"+
 				"public void execute(org.quartz.JobExecutionContext context)"+
@@ -52,9 +58,12 @@ public class QTEST {
 		context.setService("quartzService");
 //		context.setMethod("pauseAll");
 		context.setMethod("start");
+		File file = new File("C:/img.jpg");
+		FileInputStream in = new FileInputStream(file);
 //		quartzSoaManager.invoke(context);
-		context.setMethod("addJob");
-//		quartzSoaManager.invoke(context);
+		context.addAttr("file", FileUtils.readFileToByteArray(file));
+		context.setMethod("upload");
+		quartzSoaManager.invoke(context);
 	}
 	
 	public static void main2()  {

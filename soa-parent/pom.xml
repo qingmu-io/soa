@@ -15,8 +15,8 @@
 		<mysql.driver.version>5.1.31</mysql.driver.version>
 		<druid.version>1.0.7</druid.version>
 
-		<!-- <dubbo.version>2.5.4-SNAPSHOT</dubbo.version> -->
-		<dubbo.version>2.5.3</dubbo.version>
+		<dubbo.version>2.5.4-SNAPSHOT</dubbo.version>
+		<!-- <dubbo.version>2.5.3</dubbo.version> -->
 		<javassist.version>3.12.1.GA</javassist.version>
 		<netty.version>3.2.10.Final</netty.version>
 		<zookeeper.version>3.4.6</zookeeper.version>
@@ -45,11 +45,14 @@
 
 		<google-guava.version>17.0</google-guava.version>
 		<google-guava-connections.version>r03</google-guava-connections.version>
+		<fst-ser.version>2.04</fst-ser.version>
 		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+		
 		<maven.compiler.target>1.7</maven.compiler.target>
 		<maven.compiler.source>1.7</maven.compiler.source>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<project.build.sourceEncoding>${maven.compiler.encoding}</project.build.sourceEncoding>
+		
 	</properties>
 	<repositories>
 		<repository>
@@ -101,7 +104,18 @@
 				<groupId>com.github.sgroschupf</groupId>
 				<artifactId>zkclient</artifactId>
 				<version>${zkclient.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>log4j</groupId>
+						<artifactId>log4j</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.slf4j</groupId>
+						<artifactId>slf4j-log4j12</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
+
 			<!-- begin spring -->
 			<dependency>
 				<groupId>org.springframework</groupId>
@@ -419,6 +433,12 @@
 				<groupId>com.google.guava</groupId>
 				<artifactId>guava</artifactId>
 				<version>${google-guava.version}</version>
+			</dependency>
+			<!-- 序列化 -->
+			<dependency>
+				<groupId>de.ruedigermoeller</groupId>
+				<artifactId>fst</artifactId>
+				<version>${fst-ser.version}</version>
 			</dependency>
 		</dependencies>
 

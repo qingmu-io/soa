@@ -73,11 +73,10 @@ public class JobResources {
 		@ResponseBody
 		@RequestMapping(value="/upload",method=RequestMethod.POST)
 		public SoaContext uploadJavaFile(@RequestParam("file")MultipartFile file) throws IOException{
-				SoaContext context = SoaContext.newSoaContext(JOBSERVICE, "dynamicAddJob");
-				context.addAttr("jobClassName", file.getOriginalFilename());
-				context.addAttr("jobClass", file.getBytes());
-				
-			return context;
+				SoaContext context = SoaContext.newSoaContext(JOBSERVICE, "upload");
+				context.addAttr("fileName", file.getOriginalFilename());
+				context.addAttr("file", file.getBytes());
+			return soaManager.invokeNoTx(context);
 		}
 		
 		
