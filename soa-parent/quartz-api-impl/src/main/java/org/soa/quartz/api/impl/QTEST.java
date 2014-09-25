@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.dubbo.common.compiler.support.JavassistCompiler;
 
-@Service
+//@Service
 public class QTEST {
 	
 	@Resource
@@ -63,7 +63,7 @@ public class QTEST {
 //		quartzSoaManager.invoke(context);
 		context.addAttr("file", FileUtils.readFileToByteArray(file));
 		context.setMethod("upload");
-		quartzSoaManager.invoke(context);
+//		quartzSoaManager.invoke(context);
 	}
 	
 	public static void main2()  {

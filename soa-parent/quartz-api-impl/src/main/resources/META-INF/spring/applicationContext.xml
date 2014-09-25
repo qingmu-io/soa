@@ -11,11 +11,13 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<context:property-placeholder location="classpath:appliacation.properties" />
-	<dubbo:protocol name="dubbo" port="2" />
 
 	<dubbo:annotation package="${basePackage}" />
 
 	<dubbo:registry protocol="zookeeper" address="${zkaddress}" />
+	
+	<dubbo:provider id="providerPort" protocol="dubbo" port="30881"/>
+	
 
 	<!-- DataSource -->
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
@@ -49,7 +51,7 @@
 	</bean>
 
 
-	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate" >
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
 
@@ -123,6 +125,8 @@
 		<aop:advisor advice-ref="druid-stat-interceptor"
 			pointcut-ref="druid-stat-pointcut" />
 	</aop:config>
-
-
+	<util:map id="jobZookeeperMap">
+		<entry key="zkaddress" value="${zkaddress}"/>
+		<entry key="path" value="/quartzPath"></entry>
+	</util:map>
 </beans>
