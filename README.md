@@ -13,7 +13,6 @@
 * mybatis (持久)
 * quartz(调度集群)
 * dubbo (服务治理)
-* shiro (权限控制)
 * fastjson (json处理)
 * logback (日志处理)
 * Jquery (简化DOM操作)
