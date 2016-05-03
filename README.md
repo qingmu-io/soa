@@ -16,6 +16,6 @@
 * fastjson (json处理)
 * logback (日志处理)
 * Jquery (简化DOM操作)
-* angularJS (MVC框架，实现前后端分离开发)
+* angularJS (MVC框架，实现前后端分离开发) [前端页面点我](https://github.com/247687009/soa-page)
 * bootstarp2 (CSS 布局)
 
